@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>예측/분석 - Aircon4u</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/analytics.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- 헤더 -->
+  <header class="header">
+    <div class="logo-container">
+      <img src="assets/images/logo.svg" alt="Aircon4u 로고" class="logo">
+      <span class="app-title">Aircon4u</span>
+    </div>
+    
+    <div class="header-actions">
+      <!-- BLE 연결 상태 인디케이터 -->
+      <div class="ble-indicator disconnected" title="BLE 연결 안됨"></div>
+      
+      <!-- 언어 토글 -->
+      <button class="lang-toggle">EN</button>
+      
+      <!-- 테마 토글 -->
+      <button class="theme-toggle">🌙</button>
+      
+      <!-- 알림 버튼 -->
+      <button class="notification-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span class="notification-badge">3</span>
+      </button>
+      
+      <!-- 사용자 메뉴 -->
+      <div class="user-menu">
+        <div class="user-avatar">JD</div>
+        <span class="user-name">홍길동</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+    </div>
+  </header>
+  
+  <!-- 사이드 네비게이션 -->
+  <nav class="sidenav">
+    <span class="nav-toggle">&larr;</span>
+    <div class="nav-item" data-page="index">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="9"></rect>
+        <rect x="14" y="3" width="7" height="5"></rect>
+        <rect x="14" y="12" width="7" height="9"></rect>
+        <rect x="3" y="16" width="7" height="5"></rect>
+      </svg>
+      <span class="nav-text" data-i18n="dashboard">대시보드</span>
+    </div>
+    <div class="nav-item" data-page="units">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      <span class="nav-text" data-i18n="units">유닛 목록</span>
+    </div>
+    <div class="nav-item" data-page="wizard">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+        <polyline points="2 17 12 22 22 17"></polyline>
+        <polyline points="2 12 12 17 22 12"></polyline>
+      </svg>
+      <span class="nav-text" data-i18n="wizard">세척 마법사</span>
+    </div>
+    <div class="nav-item active" data-page="analytics">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+      </svg>
+      <span class="nav-text" data-i18n="analytics">예측/분석</span>
+    </div>
+    <div class="nav-item" data-page="reports">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      <span class="nav-text" data-i18n="reports">리포트 센터</span>
+    </div>
+    <div class="nav-item" data-page="sampling">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <circle cx="12" cy="12" r="6"></circle>
+        <circle cx="12" cy="12" r="2"></circle>
+      </svg>
+      <span class="nav-text" data-i18n="sampling">샘플링 대시보드</span>
+    </div>
+    <div class="nav-item" data-page="admin">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9"></path>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+      </svg>
+      <span class="nav-text" data-i18n="admin">관리자 설정</span>
+    </div>
+    <div class="nav-item" data-page="notifications">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+      </svg>
+      <span class="nav-text" data-i18n="notifications">알림 센터</span>
+    </div>
+  </nav>
+  
+  <!-- 메인 콘텐츠 -->
+  <main class="main-content">
+    <div class="page-header">
+      <h1 class="page-title" data-i18n="analytics">예측/분석</h1>
+      <div class="page-actions">
+        <div class="date-selector">
+          <button class="btn btn-outline date-selector-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            최근 12개월
+          </button>
+        </div>
+        <button class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          분석 내보내기
+        </button>
+      </div>
+    </div>
+    
+    <!-- 탭 메뉴 -->
+    <div class="tabs-container">
+      <div class="tab active" data-tab="pollution-heatmap">오염도 히트맵</div>
+      <div class="tab" data-tab="cleaning-simulator">세척 주기 시뮬레이터</div>
+      <div class="tab" data-tab="time-series">시계열 예측</div>
+      <div class="tab" data-tab="cleaning-schedule">30일 세척 일정</div>
+    </div>
+    
+    <!-- 탭 콘텐츠 -->
+    <div class="tab-content-container">
+      <!-- 탭 1: 누적 오염도 히트맵 -->
+      <div class="tab-content active" data-tab="pollution-heatmap">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">누적 오염도 히트맵</h2>
+            <div class="card-actions">
+              <select class="building-select">
+                <option value="all">전체 건물</option>
+                <option value="A">A동</option>
+                <option value="B">B동</option>
+                <option value="C">C동</option>
+              </select>
+              <div class="view-toggle">
+                <button class="view-btn active" data-view="heatmap">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                  </svg>
+                  히트맵
+                </button>
+                <button class="view-btn" data-view="table">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                  </svg>
+                  표 보기
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="heatmap-legend">
+              <div class="legend-title">오염도 수준</div>
+              <div class="legend-scale">
+                <div class="legend-color" style="background-color: #e8f4f8;"></div>
+                <div class="legend-color" style="background-color: #c5e5f2;"></div>
+                <div class="legend-color" style="background-color: #8ecde4;"></div>
+                <div class="legend-color" style="background-color: #4ba3c3;"></div>
+                <div class="legend-color" style="background-color: #2980b9;"></div>
+                <div class="legend-color" style="background-color: #1c4966;"></div>
+              </div>
+              <div class="legend-labels">
+                <span>낮음</span>
+                <span>높음</span>
+              </div>
+            </div>
+            
+            <div class="heatmap-container">
+              <div class="heatmap-sidebar">
+                <div class="sidebar-header">유닛</div>
+                <div class="sidebar-items">
+                  <div class="sidebar-item">AC-2023-0001 (대회의실 메인)</div>
+                  <div class="sidebar-item">AC-2023-0002 (사무실 A)</div>
+                  <div class="sidebar-item">AC-2023-0003 (로비 메인)</div>
+                  <div class="sidebar-item">AC-2023-0008 (소회의실 B)</div>
+                  <div class="sidebar-item">AC-2023-0022 (구내식당 메인)</div>
+                  <div class="sidebar-item">AC-2023-0017 (2층 회의실)</div>
+                  <div class="sidebar-item">AC-2023-0032 (접견실)</div>
+                  <div class="sidebar-item">AC-2023-0036 (임원실 A)</div>
+                  <div class="sidebar-item">AC-2023-0042 (3층 사무실)</div>
+                  <div class="sidebar-item">AC-2023-0048 (휴게실)</div>
+                </div>
+              </div>
+              
+              <div class="heatmap-grid">
+                <div class="grid-header">
+                  <div class="month-label">1월</div>
+                  <div class="month-label">2월</div>
+                  <div class="month-label">3월</div>
+                  <div class="month-label">4월</div>
+                  <div class="month-label">5월</div>
+                  <div class="month-label">6월</div>
+                  <div class="month-label">7월</div>
+                  <div class="month-label">8월</div>
+                  <div class="month-label">9월</div>
+                  <div class="month-label">10월</div>
+                  <div class="month-label">11월</div>
+                  <div class="month-label">12월</div>
+                </div>
+                
+                <div class="grid-body">
+                  <!-- 1행 -->
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="12"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="15"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="22"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="28"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="35"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="48"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="68"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="75"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="92"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="14"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="26"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="32"></div>
+                  
+                  <!-- 2행 -->
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="10"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="18"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="25"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="30"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="42"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="45"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="58"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="72"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="78"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="95"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="16"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="28"></div>
+                  
+                  <!-- 3행 -->
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="24"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="32"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="40"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="46"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="55"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="68"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="76"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="88"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="98"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="12"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="22"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="36"></div>
+                  
+                  <!-- 4행 -->
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="14"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="28"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="32"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="45"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="48"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="62"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="75"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="82"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="96"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="15"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="18"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="24"></div>
+                  
+                  <!-- 5행 -->
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="38"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="44"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="52"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="58"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="70"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="76"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="88"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="92"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="10"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="16"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="28"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="36"></div>
+                  
+                  <!-- 6~10행 반복 (실제 데이터는 생략) -->
+                  <!-- 6행 -->
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="15"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="18"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="24"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="32"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="40"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="48"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="60"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="74"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="78"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="90"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="12"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="26"></div>
+                  
+                  <!-- 7행 -->
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="20"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="28"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="38"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="45"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="55"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="68"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="75"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="88"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="94"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="10"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="18"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="30"></div>
+                  
+                  <!-- 8행 -->
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="12"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="16"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="22"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="30"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="42"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="56"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="62"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="76"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="82"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="95"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="14"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="24"></div>
+                  
+                  <!-- 9행 -->
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="22"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="30"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="38"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="46"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="58"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="64"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="72"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="78"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="90"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="12"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="18"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="28"></div>
+                  
+                  <!-- 10행 -->
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="10"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="16"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="24"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="34"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="45"></div>
+                  <div class="grid-cell" style="background-color: #8ecde4;" data-value="52"></div>
+                  <div class="grid-cell" style="background-color: #4ba3c3;" data-value="64"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="78"></div>
+                  <div class="grid-cell" style="background-color: #2980b9;" data-value="85"></div>
+                  <div class="grid-cell" style="background-color: #1c4966;" data-value="96"></div>
+                  <div class="grid-cell" style="background-color: #e8f4f8;" data-value="13"></div>
+                  <div class="grid-cell" style="background-color: #c5e5f2;" data-value="26"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 테이블 뷰 (기본적으로 숨겨짐) -->
+            <div class="table-view" style="display: none;">
+              <div class="table-container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>유닛 ID</th>
+                      <th>유닛 명칭</th>
+                      <th>1월</th>
+                      <th>2월</th>
+                      <th>3월</th>
+                      <th>4월</th>
+                      <th>5월</th>
+                      <th>6월</th>
+                      <th>7월</th>
+                      <th>8월</th>
+                      <th>9월</th>
+                      <th>10월</th>
+                      <th>11월</th>
+                      <th>12월</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>AC-2023-0001</td>
+                      <td>대회의실 메인</td>
+                      <td>12</td>
+                      <td>15</td>
+                      <td>22</td>
+                      <td>28</td>
+                      <td>35</td>
+                      <td>48</td>
+                      <td>68</td>
+                      <td>75</td>
+                      <td>92</td>
+                      <td>14</td>
+                      <td>26</td>
+                      <td>32</td>
+                    </tr>
+                    <tr>
+                      <td>AC-2023-0002</td>
+                      <td>사무실 A</td>
+                      <td>10</td>
+                      <td>18</td>
+                      <td>25</td>
+                      <td>30</td>
+                      <td>42</td>
+                      <td>45</td>
+                      <td>58</td>
+                      <td>72</td>
+                      <td>78</td>
+                      <td>95</td>
+                      <td>16</td>
+                      <td>28</td>
+                    </tr>
+                    <!-- 나머지 행 생략 -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 탭 2: 세척 주기 시뮬레이터 -->
+      <div class="tab-content" data-tab="cleaning-simulator">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">세척 주기 시뮬레이터</h2>
+            <div class="card-actions">
+              <button class="btn btn-outline simulator-reset-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="1 4 1 10 7 10"></polyline>
+                  <polyline points="23 20 23 14 17 14"></polyline>
+                  <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                </svg>
+                초기화
+              </button>
+              <button class="btn btn-primary simulator-calculate-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+                최적화 계산
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="simulator-description">
+              <p>세척 주기 시뮬레이터는 여러 요소를 고려하여 각 유닛의 최적 세척 주기를 계산합니다. 아래 가중치 슬라이더를 조정하여 시뮬레이션을 맞춤화할 수 있습니다.</p>
+            </div>
+            
+            <div class="simulator-controls">
+              <div class="simulator-sliders">
+                <div class="slider-group">
+                  <label class="slider-label">연식 가중치</label>
+                  <div class="slider-container">
+                    <input type="range" min="1" max="5" value="3" class="slider" id="age-weight">
+                    <div class="slider-value">3</div>
+                  </div>
+                  <div class="slider-desc">연식이 높을수록 세척 주기에 더 큰 영향을 줍니다.</div>
+                </div>
+                
+                <div class="slider-group">
+                  <label class="slider-label">가동률 가중치</label>
+                  <div class="slider-container">
+                    <input type="range" min="1" max="5" value="4" class="slider" id="usage-weight">
+                    <div class="slider-value">4</div>
+                  </div>
+                  <div class="slider-desc">가동 시간이 길수록 세척 주기에 더 큰 영향을 줍니다.</div>
+                </div>
+                
+                <div class="slider-group">
+                  <label class="slider-label">환경 가중치</label>
+                  <div class="slider-container">
+                    <input type="range" min="1" max="5" value="3" class="slider" id="environment-weight">
+                    <div class="slider-value">3</div>
+                  </div>
+                  <div class="slider-desc">주변 환경(먼지, 습도)이 나쁠수록 세척 주기에 더 큰 영향을 줍니다.</div>
+                </div>
+              </div>
+              
+              <div class="simulator-options">
+                <div class="option-group">
+                  <label class="option-label">세척 기준 임계값</label>
+                  <select class="form-control" id="threshold-select">
+                    <option value="75">75% (보수적)</option>
+                    <option value="85" selected>85% (표준)</option>
+                    <option value="95">95% (여유있게)</option>
+                  </select>
+                </div>
+                
+                <div class="option-group">
+                  <label class="option-label">계절 효과 고려</label>
+                  <div class="toggle-switch">
+                    <input type="checkbox" id="seasonal-toggle" checked>
+                    <label for="seasonal-toggle"></label>
+                  </div>
+                </div>
+                
+                <div class="option-group">
+                  <label class="option-label">유지보수 인력 규모</label>
+                  <select class="form-control" id="staff-select">
+                    <option value="small">소규모 (1-2명)</option>
+                    <option value="medium" selected>중규모 (3-5명)</option>
+                    <option value="large">대규모 (6명 이상)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="simulation-results">
+              <h3 class="results-title">시뮬레이션 결과</h3>
+              
+              <div class="results-charts">
+                <div class="chart-container">
+                  <h4>연간 세척 빈도 분포</h4>
+                  <canvas id="cleaningFrequencyChart"></canvas>
+                </div>
+                <div class="chart-container">
+                  <h4>최적 세척 주기 (월)</h4>
+                  <canvas id="cleaningCycleChart"></canvas>
+                </div>
+              </div>
+              
+              <div class="results-summary">
+                <div class="summary-item">
+                  <div class="summary-label">연간 총 세척 횟수</div>
+                  <div class="summary-value" id="total-cleanings">142</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-label">평균 세척 주기</div>
+                  <div class="summary-value" id="avg-cycle">3.2개월</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-label">예상 전력 절감</div>
+                  <div class="summary-value" id="power-saving">12,450 kWh</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-label">예상 비용 절감</div>
+                  <div class="summary-value" id="cost-saving">₩2,490,000</div>
+                </div>
+              </div>
+              
+              <div class="optimization-recommendation">
+                <div class="recommendation-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                </div>
+                <div class="recommendation-content">
+                  <div class="recommendation-title">최적화 추천</div>
+                  <div class="recommendation-text">
+                    현재 설정에서는 여름철(6~8월)에 세척 빈도를 15% 증가시키고, 운영 피크 시즌에는 우선순위가 높은 유닛(회의실, 로비)에 집중하는 것이 좋습니다. 가동률이 높은 유닛은 더 짧은 세척 주기(약 2.5개월)가 권장됩니다.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 탭 3: 시계열 예측 -->
+      <div class="tab-content" data-tab="time-series">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">시계열 예측</h2>
+            <div class="card-actions">
+              <select class="unit-select">
+                <option value="">유닛 선택</option>
+                <option value="AC-2023-0001">AC-2023-0001 (대회의실 메인)</option>
+                <option value="AC-2023-0002">AC-2023-0002 (사무실 A)</option>
+                <option value="AC-2023-0003">AC-2023-0003 (로비 메인)</option>
+                <option value="AC-2023-0008" selected>AC-2023-0008 (소회의실 B)</option>
+                <option value="AC-2023-0022">AC-2023-0022 (구내식당 메인)</option>
+              </select>
+              <select class="metric-select">
+                <option value="pollution">오염도</option>
+                <option value="efficiency">효율성</option>
+                <option value="power">전력 소비량</option>
+              </select>
+              <select class="period-select">
+                <option value="30">30일</option>
+                <option value="60">60일</option>
+                <option value="90" selected>90일</option>
+                <option value="180">180일</option>
+              </select>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="forecast-chart-container">
+              <canvas id="forecastChart"></canvas>
+            </div>
+            
+            <div class="forecast-details">
+              <div class="forecast-stats">
+                <div class="stat-item">
+                  <div class="stat-label">임계값 도달 예상일</div>
+                  <div class="stat-value threshold-date">2025-06-18</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-label">신뢰 구간</div>
+                  <div class="stat-value confidence-interval">±7일</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-label">예측 모델</div>
+                  <div class="stat-value prediction-model">ARIMA(2,1,1)</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-label">예측 정확도</div>
+                  <div class="stat-value prediction-accuracy">87.5%</div>
+                </div>
+              </div>
+              
+              <div class="forecast-factors">
+                <h4>영향 요인 분석</h4>
+                <div class="factors-list">
+                  <div class="factor-item">
+                    <div class="factor-name">가동 시간</div>
+                    <div class="factor-influence positive">
+                      <span class="influence-icon">↑</span>
+                      <span class="influence-value">32%</span>
+                    </div>
+                  </div>
+                  <div class="factor-item">
+                    <div class="factor-name">평균 온도</div>
+                    <div class="factor-influence positive">
+                      <span class="influence-icon">↑</span>
+                      <span class="influence-value">28%</span>
+                    </div>
+                  </div>
+                  <div class="factor-item">
+                    <div class="factor-name">환경 먼지</div>
+                    <div class="factor-influence positive">
+                      <span class="influence-icon">↑</span>
+                      <span class="influence-value">24%</span>
+                    </div>
+                  </div>
+                  <div class="factor-item">
+                    <div class="factor-name">정기 유지보수</div>
+                    <div class="factor-influence negative">
+                      <span class="influence-icon">↓</span>
+                      <span class="influence-value">15%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="seasonal-patterns">
+              <h4>계절적 패턴 분석</h4>
+              <div class="seasonal-chart-container">
+                <canvas id="seasonalChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 탭 4: 30일 세척 일정 -->
+      <div class="tab-content" data-tab="cleaning-schedule">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">다음 30일 세척 리스트</h2>
+            <div class="card-actions">
+              <button class="btn btn-outline calendar-view-btn active">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                캘린더 보기
+              </button>
+              <button class="btn btn-outline list-view-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+                리스트 보기
+              </button>
+              <button class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="12" y1="8" x2="12" y2="16"></line>
+                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                세척 일정 추가
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="calendar-view active">
+              <div class="calendar-header">
+                <div class="month-navigation">
+                  <button class="prev-month-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                  </button>
+                  <h3 class="current-month">2025년 4월</h3>
+                  <button class="next-month-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              
+              <div class="calendar-grid">
+                <div class="calendar-days">
+                  <div class="day-name">일</div>
+                  <div class="day-name">월</div>
+                  <div class="day-name">화</div>
+                  <div class="day-name">수</div>
+                  <div class="day-name">목</div>
+                  <div class="day-name">금</div>
+                  <div class="day-name">토</div>
+                </div>
+                
+                <div class="calendar-dates">
+                  <!-- 3월 말일 -->
+                  <div class="date-cell other-month">
+                    <div class="date-number">30</div>
+                  </div>
+                  <div class="date-cell other-month">
+                    <div class="date-number">31</div>
+                  </div>
+                  
+                  <!-- 4월 -->
+                  <div class="date-cell">
+                    <div class="date-number">1</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">2</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">3</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">4</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">5</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">6</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">7</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">8</div>
+                    <div class="event" data-unit="AC-2023-0008">
+                      <div class="event-dot"></div>
+                      <div class="event-title">소회의실 B</div>
+                    </div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">9</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">10</div>
+                    <div class="event" data-unit="AC-2023-0022">
+                      <div class="event-dot"></div>
+                      <div class="event-title">구내식당 메인</div>
+                    </div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">11</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">12</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">13</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">14</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">15</div>
+                    <div class="event" data-unit="AC-2023-0003">
+                      <div class="event-dot"></div>
+                      <div class="event-title">로비 메인</div>
+                    </div>
+                    <div class="event" data-unit="AC-2023-0017">
+                      <div class="event-dot"></div>
+                      <div class="event-title">2층 회의실</div>
+                    </div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">16</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">17</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">18</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">19</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">20</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">21</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">22</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">23</div>
+                    <div class="event" data-unit="AC-2023-0036">
+                      <div class="event-dot"></div>
+                      <div class="event-title">임원실 A</div>
+                    </div>
+                  </div>
+                  <div class="date-cell current-date">
+                    <div class="date-number">24</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">25</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">26</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">27</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">28</div>
+                    <div class="event" data-unit="AC-2023-0032">
+                      <div class="event-dot"></div>
+                      <div class="event-title">접견실</div>
+                    </div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">29</div>
+                  </div>
+                  <div class="date-cell">
+                    <div class="date-number">30</div>
+                  </div>
+                  
+                  <!-- 5월 시작 -->
+                  <div class="date-cell other-month">
+                    <div class="date-number">1</div>
+                  </div>
+                  <div class="date-cell other-month">
+                    <div class="date-number">2</div>
+                  </div>
+                  <div class="date-cell other-month">
+                    <div class="date-number">3</div>
+                  </div>
+                  <div class="date-cell other-month">
+                    <div class="date-number">4</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="list-view" style="display: none;">
+              <div class="cleaning-list-container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>날짜</th>
+                      <th>유닛 ID</th>
+                      <th>유닛 명칭</th>
+                      <th>위치</th>
+                      <th>담당자</th>
+                      <th>상태</th>
+                      <th>액션</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>2025-04-08</td>
+                      <td>AC-2023-0008</td>
+                      <td>소회의실 B</td>
+                      <td>B동 3층 소회의실</td>
+                      <td>김기술</td>
+                      <td><span class="badge badge-warning">예정됨</span></td>
+                      <td>
+                        <div class="action-buttons">
+                          <button class="btn btn-sm btn-outline" title="상세 보기">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                              <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="수정">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="취소">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <line x1="15" y1="9" x2="9" y2="15"></line>
+                              <line x1="9" y1="9" x2="15" y2="15"></line>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2025-04-10</td>
+                      <td>AC-2023-0022</td>
+                      <td>구내식당 메인</td>
+                      <td>A동 1층 구내식당</td>
+                      <td>이관리</td>
+                      <td><span class="badge badge-warning">예정됨</span></td>
+                      <td>
+                        <div class="action-buttons">
+                          <button class="btn btn-sm btn-outline" title="상세 보기">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                              <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="수정">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="취소">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <line x1="15" y1="9" x2="9" y2="15"></line>
+                              <line x1="9" y1="9" x2="15" y2="15"></line>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2025-04-15</td>
+                      <td>AC-2023-0003</td>
+                      <td>로비 메인</td>
+                      <td>A동 1층 로비</td>
+                      <td>박정비</td>
+                      <td><span class="badge badge-warning">예정됨</span></td>
+                      <td>
+                        <div class="action-buttons">
+                          <button class="btn btn-sm btn-outline" title="상세 보기">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                              <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="수정">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="취소">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <line x1="15" y1="9" x2="9" y2="15"></line>
+                              <line x1="9" y1="9" x2="15" y2="15"></line>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2025-04-15</td>
+                      <td>AC-2023-0017</td>
+                      <td>2층 회의실</td>
+                      <td>B동 2층 회의실</td>
+                      <td>김기술</td>
+                      <td><span class="badge badge-warning">예정됨</span></td>
+                      <td>
+                        <div class="action-buttons">
+                          <button class="btn btn-sm btn-outline" title="상세 보기">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                              <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="수정">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="취소">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <line x1="15" y1="9" x2="9" y2="15"></line>
+                              <line x1="9" y1="9" x2="15" y2="15"></line>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2025-04-23</td>
+                      <td>AC-2023-0036</td>
+                      <td>임원실 A</td>
+                      <td>C동 4층 임원실</td>
+                      <td>이관리</td>
+                      <td><span class="badge badge-warning">예정됨</span></td>
+                      <td>
+                        <div class="action-buttons">
+                          <button class="btn btn-sm btn-outline" title="상세 보기">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                              <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="수정">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="취소">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <line x1="15" y1="9" x2="9" y2="15"></line>
+                              <line x1="9" y1="9" x2="15" y2="15"></line>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2025-04-28</td>
+                      <td>AC-2023-0032</td>
+                      <td>접견실</td>
+                      <td>A동 2층 접견실</td>
+                      <td>박정비</td>
+                      <td><span class="badge badge-warning">예정됨</span></td>
+                      <td>
+                        <div class="action-buttons">
+                          <button class="btn btn-sm btn-outline" title="상세 보기">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                              <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="수정">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="취소">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="12" cy="12" r="10"></circle>
+                              <line x1="15" y1="9" x2="9" y2="15"></line>
+                              <line x1="9" y1="9" x2="15" y2="15"></line>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- 푸터 -->
+  <footer class="footer">
+    <div>Aircon4u v1.0.0 &copy; 2025 Aircon4u. All rights reserved.</div>
+  </footer>
+  
+  <!-- 세척 일정 추가 모달 -->
+  <div class="modal-backdrop" id="add-schedule-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">세척 일정 추가</h3>
+        <button class="modal-close" onclick="closeModal('add-schedule-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">유닛 선택</label>
+          <select class="form-control">
+            <option value="">선택하세요</option>
+            <option value="AC-2023-0001">AC-2023-0001 (대회의실 메인)</option>
+            <option value="AC-2023-0002">AC-2023-0002 (사무실 A)</option>
+            <option value="AC-2023-0003">AC-2023-0003 (로비 메인)</option>
+            <option value="AC-2023-0008">AC-2023-0008 (소회의실 B)</option>
+            <option value="AC-2023-0022">AC-2023-0022 (구내식당 메인)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">일정 날짜</label>
+          <input type="date" class="form-control" value="2025-04-30">
+        </div>
+        <div class="form-group">
+          <label class="form-label">담당자</label>
+          <select class="form-control">
+            <option value="">선택하세요</option>
+            <option value="김기술">김기술</option>
+            <option value="이관리">이관리</option>
+            <option value="박정비">박정비</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">메모</label>
+          <textarea class="form-control" rows="3" placeholder="추가 정보를 입력하세요"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('add-schedule-modal')">취소</button>
+        <button class="btn btn-primary">저장</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 토스트 컨테이너 -->
+  <div class="toast-container"></div>
+  
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/analytics.js"></script>
+</body>
+</html>

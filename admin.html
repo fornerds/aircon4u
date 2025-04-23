@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 설정 - Aircon4u</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <!-- 헤더 -->
+  <header class="header">
+    <div class="logo-container">
+      <img src="assets/images/logo.svg" alt="Aircon4u 로고" class="logo">
+      <span class="app-title">Aircon4u</span>
+    </div>
+    
+    <div class="header-actions">
+      <!-- BLE 연결 상태 인디케이터 -->
+      <div class="ble-indicator disconnected" title="BLE 연결 안됨"></div>
+      
+      <!-- 언어 토글 -->
+      <button class="lang-toggle">EN</button>
+      
+      <!-- 테마 토글 -->
+      <button class="theme-toggle">🌙</button>
+      
+      <!-- 알림 버튼 -->
+      <button class="notification-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span class="notification-badge">3</span>
+      </button>
+      
+      <!-- 사용자 메뉴 -->
+      <div class="user-menu">
+        <div class="user-avatar">JD</div>
+        <span class="user-name">홍길동</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+    </div>
+  </header>
+  
+  <!-- 사이드 네비게이션 -->
+  <nav class="sidenav">
+    <span class="nav-toggle">&larr;</span>
+    <div class="nav-item" data-page="index">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="9"></rect>
+        <rect x="14" y="3" width="7" height="5"></rect>
+        <rect x="14" y="12" width="7" height="9"></rect>
+        <rect x="3" y="16" width="7" height="5"></rect>
+      </svg>
+      <span class="nav-text" data-i18n="dashboard">대시보드</span>
+    </div>
+    <div class="nav-item" data-page="units">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      <span class="nav-text" data-i18n="units">유닛 목록</span>
+    </div>
+    <div class="nav-item" data-page="wizard">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+        <polyline points="2 17 12 22 22 17"></polyline>
+        <polyline points="2 12 12 17 22 12"></polyline>
+      </svg>
+      <span class="nav-text" data-i18n="wizard">세척 마법사</span>
+    </div>
+    <div class="nav-item" data-page="analytics">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+      </svg>
+      <span class="nav-text" data-i18n="analytics">예측/분석</span>
+    </div>
+    <div class="nav-item" data-page="reports">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      <span class="nav-text" data-i18n="reports">리포트 센터</span>
+    </div>
+    <div class="nav-item" data-page="sampling">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <circle cx="12" cy="12" r="6"></circle>
+        <circle cx="12" cy="12" r="2"></circle>
+      </svg>
+      <span class="nav-text" data-i18n="sampling">샘플링 대시보드</span>
+    </div>
+    <div class="nav-item active" data-page="admin">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9"></path>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+      </svg>
+      <span class="nav-text" data-i18n="admin">관리자 설정</span>
+    </div>
+    <div class="nav-item" data-page="notifications">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+      </svg>
+      <span class="nav-text" data-i18n="notifications">알림 센터</span>
+    </div>
+  </nav>
+  
+  <!-- 메인 콘텐츠 -->
+  <main class="main-content">
+    <div class="page-header">
+      <h1 class="page-title" data-i18n="admin">관리자 설정</h1>
+    </div>
+    
+    <!-- 관리자 설정 콘텐츠 영역 -->
+    <section class="admin-content">
+      <div class="admin-tabs">
+        <div class="tab active" data-tab="users">사용자 관리</div>
+        <div class="tab" data-tab="roles">권한 설정</div>
+        <div class="tab" data-tab="settings">시스템 설정</div>
+        <div class="tab" data-tab="logs">시스템 로그</div>
+      </div>
+      
+      <div class="admin-tab-content">
+        <!-- 사용자 관리 탭 -->
+        <div class="tab-content active" data-tab="users">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">사용자 관리</h2>
+              <div class="card-actions">
+                <button class="btn btn-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                  </svg>
+                  사용자 추가
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <!-- 사용자 목록 테이블 -->
+              <div class="table-container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>이름</th>
+                      <th>이메일</th>
+                      <th>역할</th>
+                      <th>상태</th>
+                      <th>마지막 로그인</th>
+                      <th>액션</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>홍길동</td>
+                      <td>hong@example.com</td>
+                      <td>관리자</td>
+                      <td><span class="badge badge-success">활성</span></td>
+                      <td>2025-04-18 09:45</td>
+                      <td>
+                        <div class="action-buttons">
+                          <button class="btn btn-sm btn-outline" title="편집">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="삭제">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <polyline points="3 6 5 6 21 6"></polyline>
+                              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>김철수</td>
+                      <td>kim@example.com</td>
+                      <td>기술자</td>
+                      <td><span class="badge badge-success">활성</span></td>
+                      <td>2025-04-17 14:30</td>
+                      <td>
+                        <div class="action-buttons">
+                          <button class="btn btn-sm btn-outline" title="편집">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="삭제">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <polyline points="3 6 5 6 21 6"></polyline>
+                              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>이영희</td>
+                      <td>lee@example.com</td>
+                      <td>운영자</td>
+                      <td><span class="badge badge-warning">휴면</span></td>
+                      <td>2025-04-10 11:20</td>
+                      <td>
+                        <div class="action-buttons">
+                          <button class="btn btn-sm btn-outline" title="편집">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                          </button>
+                          <button class="btn btn-sm btn-outline" title="삭제">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <polyline points="3 6 5 6 21 6"></polyline>
+                              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- 푸터 -->
+  <footer class="footer">
+    <div>Aircon4u v1.0.0 &copy; 2025 Aircon4u. All rights reserved.</div>
+  </footer>
+  
+  <!-- 토스트 컨테이너 -->
+  <div class="toast-container"></div>
+  
+  <script>
+    // 사이드 내비게이션 페이지 전환 기능
+    document.addEventListener('DOMContentLoaded', function() {
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const pageName = this.getAttribute('data-page');
+          if (pageName) {
+            // 현재 페이지가 아닌 경우에만 이동
+            if (!this.classList.contains('active')) {
+              window.location.href = pageName + '.html';
+            }
+          }
+        });
+      });
+      
+      // 관리자 설정 탭 전환
+      const adminTabs = document.querySelectorAll('.admin-tabs .tab');
+      const tabContents = document.querySelectorAll('.admin-tab-content .tab-content');
+      
+      adminTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          const tabName = this.getAttribute('data-tab');
+          
+          // 탭 활성화 상태 변경
+          adminTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          
+          // 탭 콘텐츠 활성화 상태 변경
+          tabContents.forEach(content => {
+            if (content.getAttribute('data-tab') === tabName) {
+              content.classList.add('active');
+            } else {
+              content.classList.remove('active');
+            }
+          });
+        });
+      });
+    });
+  </script>
+  
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

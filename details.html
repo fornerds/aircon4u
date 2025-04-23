@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>유닛 상세 - Aircon4u</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/details.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- 헤더 -->
+  <header class="header">
+    <div class="logo-container">
+      <img src="assets/images/logo.svg" alt="Aircon4u 로고" class="logo">
+      <span class="app-title">Aircon4u</span>
+    </div>
+    
+    <div class="header-actions">
+      <!-- BLE 연결 상태 인디케이터 -->
+      <div class="ble-indicator disconnected" title="BLE 연결 안됨"></div>
+      
+      <!-- 언어 토글 -->
+      <button class="lang-toggle">EN</button>
+      
+      <!-- 테마 토글 -->
+      <button class="theme-toggle">🌙</button>
+      
+      <!-- 알림 버튼 -->
+      <button class="notification-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span class="notification-badge">3</span>
+      </button>
+      
+      <!-- 사용자 메뉴 -->
+      <div class="user-menu">
+        <div class="user-avatar">JD</div>
+        <span class="user-name">홍길동</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+    </div>
+  </header>
+  
+  <!-- 사이드 네비게이션 -->
+  <nav class="sidenav">
+    <span class="nav-toggle">&larr;</span>
+    <div class="nav-item" data-page="index">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="9"></rect>
+        <rect x="14" y="3" width="7" height="5"></rect>
+        <rect x="14" y="12" width="7" height="9"></rect>
+        <rect x="3" y="16" width="7" height="5"></rect>
+      </svg>
+      <span class="nav-text" data-i18n="dashboard">대시보드</span>
+    </div>
+    <div class="nav-item active" data-page="units">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      <span class="nav-text" data-i18n="units">유닛 목록</span>
+    </div>
+    <div class="nav-item" data-page="wizard">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+        <polyline points="2 17 12 22 22 17"></polyline>
+        <polyline points="2 12 12 17 22 12"></polyline>
+      </svg>
+      <span class="nav-text" data-i18n="wizard">세척 마법사</span>
+    </div>
+    <div class="nav-item" data-page="analytics">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+      </svg>
+      <span class="nav-text" data-i18n="analytics">예측/분석</span>
+    </div>
+    <div class="nav-item" data-page="reports">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      <span class="nav-text" data-i18n="reports">리포트 센터</span>
+    </div>
+    <div class="nav-item" data-page="sampling">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <circle cx="12" cy="12" r="6"></circle>
+        <circle cx="12" cy="12" r="2"></circle>
+      </svg>
+      <span class="nav-text" data-i18n="sampling">샘플링 대시보드</span>
+    </div>
+    <div class="nav-item" data-page="admin">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9"></path>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+      </svg>
+      <span class="nav-text" data-i18n="admin">관리자 설정</span>
+    </div>
+    <div class="nav-item" data-page="notifications">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+      </svg>
+      <span class="nav-text" data-i18n="notifications">알림 센터</span>
+    </div>
+  </nav>
+  
+  <!-- 메인 콘텐츠 -->
+  <main class="main-content">
+    <div class="page-header">
+      <div class="breadcrumb">
+        <a href="units.html" class="breadcrumb-item">유닛 목록</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item current">유닛 상세</span>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-outline" onclick="location.href='wizard.html'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          세척 마법사 실행
+        </button>
+        <button class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          리포트 다운로드
+        </button>
+      </div>
+    </div>
+    
+    <!-- 유닛 정보 헤더 -->
+    <div class="unit-header">
+      <div class="unit-info">
+        <h1 class="unit-title">AC-2023-0042</h1>
+        <div class="unit-subtitle">3층 사무실</div>
+        <div class="unit-status">
+          <span class="badge badge-warning">세척 필요</span>
+          <span class="badge badge-info">연결됨</span>
+        </div>
+      </div>
+      <div class="unit-details">
+        <div class="detail-item">
+          <div class="detail-label">모델</div>
+          <div class="detail-value">Samsung HVAC Pro 2023</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">설치일</div>
+          <div class="detail-value">2023-06-15</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">마지막 세척</div>
+          <div class="detail-value">2025-01-10</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">누적 가동 시간</div>
+          <div class="detail-value">2,458 시간</div>
+        </div>
+      </div>
+      <div class="unit-image">
+        <img src="assets/images/unit-image.svg" alt="에어컨 유닛 이미지">
+      </div>
+    </div>
+    
+    <!-- 실시간 센서 데이터 -->
+    <section class="row">
+      <div class="card sensor-data-card">
+        <div class="card-header">
+          <h2 class="card-title">실시간 센서 데이터</h2>
+          <div class="card-actions">
+            <button class="btn btn-outline refresh-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <polyline points="23 20 23 14 17 14"></polyline>
+                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+              </svg>
+              새로고침
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="sensor-grid">
+            <div class="sensor-item">
+              <div class="sensor-title">흡입 온도</div>
+              <div class="sensor-value">24.5°C</div>
+              <div class="sensor-chart">
+                <canvas id="intakeTemperatureChart"></canvas>
+              </div>
+            </div>
+            <div class="sensor-item">
+              <div class="sensor-title">흡입 습도</div>
+              <div class="sensor-value">45%</div>
+              <div class="sensor-chart">
+                <canvas id="intakeHumidityChart"></canvas>
+              </div>
+            </div>
+            <div class="sensor-item">
+              <div class="sensor-title">토출 온도</div>
+              <div class="sensor-value">14.2°C</div>
+              <div class="sensor-chart">
+                <canvas id="outputTemperatureChart"></canvas>
+              </div>
+            </div>
+            <div class="sensor-item">
+              <div class="sensor-title">토출 습도</div>
+              <div class="sensor-value">62%</div>
+              <div class="sensor-chart">
+                <canvas id="outputHumidityChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 성능 지표 및 오염도 차트 -->
+    <section class="row">
+      <div class="card performance-card">
+        <div class="card-header">
+          <h2 class="card-title">성능 지표</h2>
+          <div class="card-actions">
+            <div class="time-range-toggles">
+              <button class="btn btn-sm time-range-btn active">일</button>
+              <button class="btn btn-sm time-range-btn">주</button>
+              <button class="btn btn-sm time-range-btn">월</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="performance-chart-container">
+            <canvas id="performanceChart"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card pollution-card">
+        <div class="card-header">
+          <h2 class="card-title">오염도 분석</h2>
+        </div>
+        <div class="card-body">
+          <div class="pollution-gauge">
+            <div class="gauge-container">
+              <div class="gauge" data-percentage="75">
+                <div class="gauge-fill" style="transform: rotate(135deg)"></div>
+                <div class="gauge-cover">75%</div>
+              </div>
+            </div>
+            <div class="gauge-labels">
+              <div class="gauge-label-item">
+                <div class="label-color" style="background-color: #4CAF50;"></div>
+                <div class="label-text">정상 (0-40%)</div>
+              </div>
+              <div class="gauge-label-item">
+                <div class="label-color" style="background-color: #FFC107;"></div>
+                <div class="label-text">주의 (41-70%)</div>
+              </div>
+              <div class="gauge-label-item">
+                <div class="label-color" style="background-color: #F44336;"></div>
+                <div class="label-text">경고 (71-100%)</div>
+              </div>
+            </div>
+          </div>
+          <div class="pollution-details">
+            <h3>세척 권장 분석</h3>
+            <div class="detail-row">
+              <div class="detail-label">현재 오염도</div>
+              <div class="detail-value">75%</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-label">권장 세척일</div>
+              <div class="detail-value">2025-04-25 (3일 후)</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-label">예상 효율 감소</div>
+              <div class="detail-value">-18%</div>
+            </div>
+            <div class="detail-row">
+              <div class="detail-label">예상 에너지 소비 증가</div>
+              <div class="detail-value">+22%</div>
+            </div>
+          </div>
+          <div class="pollution-action">
+            <button class="btn btn-primary btn-block" onclick="location.href='wizard.html'">세척 예약</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 유지보수 내역 및 알람 로그 -->
+    <section class="row">
+      <div class="card maintenance-card">
+        <div class="card-header">
+          <h2 class="card-title">유지보수 내역</h2>
+          <div class="card-actions">
+            <button class="btn btn-sm btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+              </svg>
+              내역 추가
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="maintenance-list">
+            <div class="maintenance-item">
+              <div class="maintenance-date">2025-01-10</div>
+              <div class="maintenance-type">정기 세척</div>
+              <div class="maintenance-technician">김철수</div>
+              <div class="maintenance-note">전체 세척 완료, 필터 교체</div>
+            </div>
+            <div class="maintenance-item">
+              <div class="maintenance-date">2024-10-15</div>
+              <div class="maintenance-type">필터 교체</div>
+              <div class="maintenance-technician">박지민</div>
+              <div class="maintenance-note">헤파 필터 교체</div>
+            </div>
+            <div class="maintenance-item">
+              <div class="maintenance-date">2024-07-22</div>
+              <div class="maintenance-type">정기 세척</div>
+              <div class="maintenance-technician">김철수</div>
+              <div class="maintenance-note">전체 세척 완료</div>
+            </div>
+            <div class="maintenance-item">
+              <div class="maintenance-date">2024-04-05</div>
+              <div class="maintenance-type">센서 교체</div>
+              <div class="maintenance-technician">이영희</div>
+              <div class="maintenance-note">온도 센서 교체</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card alarms-card">
+        <div class="card-header">
+          <h2 class="card-title">알람 로그</h2>
+        </div>
+        <div class="card-body">
+          <div class="alarms-list">
+            <div class="alarm-item">
+              <div class="alarm-timestamp">2025-04-18 08:32</div>
+              <div class="alarm-type warning">경고</div>
+              <div class="alarm-message">누적 오염도 75% 도달</div>
+            </div>
+            <div class="alarm-item">
+              <div class="alarm-timestamp">2025-04-10 14:45</div>
+              <div class="alarm-type info">정보</div>
+              <div class="alarm-message">필터 교체 권장일 도래</div>
+            </div>
+            <div class="alarm-item">
+              <div class="alarm-timestamp">2025-03-22 09:15</div>
+              <div class="alarm-type info">정보</div>
+              <div class="alarm-message">누적 오염도 50% 도달</div>
+            </div>
+            <div class="alarm-item">
+              <div class="alarm-timestamp">2025-03-05 16:20</div>
+              <div class="alarm-type danger">위험</div>
+              <div class="alarm-message">토출 온도 센서 오류 발생</div>
+            </div>
+            <div class="alarm-item">
+              <div class="alarm-timestamp">2025-03-05 16:25</div>
+              <div class="alarm-type success">해결</div>
+              <div class="alarm-message">토출 온도 센서 오류 해결</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- 푸터 -->
+  <footer class="footer">
+    <div>Aircon4u v1.0.0 &copy; 2025 Aircon4u. All rights reserved.</div>
+  </footer>
+  
+  <!-- 토스트 컨테이너 -->
+  <div class="toast-container"></div>
+  
+  <script>
+    // 사이드 내비게이션 페이지 전환 기능
+    document.addEventListener('DOMContentLoaded', function() {
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const pageName = this.getAttribute('data-page');
+          if (pageName) {
+            // 현재 페이지가 아닌 경우에만 이동
+            if (!this.classList.contains('active')) {
+              window.location.href = pageName + '.html';
+            }
+          }
+        });
+      });
+      
+      // URL에서 유닛 ID 추출 및 표시
+      const urlParams = new URLSearchParams(window.location.search);
+      const unitId = urlParams.get('id');
+      
+      if (unitId) {
+        document.querySelector('.unit-title').textContent = unitId;
+      }
+      
+      // 차트 초기화 (예시)
+      const createSensorChart = (canvasId, label, data, color) => {
+        const ctx = document.getElementById(canvasId).getContext('2d');
+        return new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00'],
+            datasets: [{
+              label: label,
+              data: data,
+              borderColor: color,
+              backgroundColor: color + '20',
+              tension: 0.4,
+              fill: true
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false
+              }
+            },
+            scales: {
+              x: {
+                display: false
+              },
+              y: {
+                display: false
+              }
+            },
+            elements: {
+              point: {
+                radius: 0
+              }
+            }
+          }
+        });
+      };
+      
+      // 센서 데이터 차트 생성
+      createSensorChart('intakeTemperatureChart', '흡입 온도', [23.5, 23.8, 24.2, 24.5, 24.3, 24.1, 24.5], '#2196F3');
+      createSensorChart('intakeHumidityChart', '흡입 습도', [42, 43, 44, 45, 46, 45, 45], '#4CAF50');
+      createSensorChart('outputTemperatureChart', '토출 온도', [14.5, 14.3, 14.0, 14.2, 14.5, 14.3, 14.2], '#FF9800');
+      createSensorChart('outputHumidityChart', '토출 습도', [60, 61, 62, 63, 62, 62, 62], '#9C27B0');
+      
+      // 성능 지표 차트
+      const perfCtx = document.getElementById('performanceChart').getContext('2d');
+      const performanceChart = new Chart(perfCtx, {
+        type: 'line',
+        data: {
+          labels: ['4/12', '4/13', '4/14', '4/15', '4/16', '4/17', '4/18'],
+          datasets: [{
+            label: '냉방 효율 (COP)',
+            data: [3.2, 3.1, 3.0, 2.9, 2.85, 2.8, 2.7],
+            borderColor: '#2196F3',
+            backgroundColor: 'transparent',
+            yAxisID: 'y'
+          }, {
+            label: '에너지 소비 (kWh)',
+            data: [42, 43, 45, 46, 47, 48, 50],
+            borderColor: '#FF9800',
+            backgroundColor: 'transparent',
+            yAxisID: 'y1'
+          }]
+        },
+        options: {
+          responsive: true,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          plugins: {
+            tooltip: {
+              mode: 'index',
+              intersect: false
+            }
+          },
+          scales: {
+            y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              title: {
+                display: true,
+                text: '냉방 효율 (COP)'
+              }
+            },
+            y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              title: {
+                display: true,
+                text: '에너지 소비 (kWh)'
+              },
+              grid: {
+                drawOnChartArea: false
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+  
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

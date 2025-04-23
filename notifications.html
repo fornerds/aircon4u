@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>알림 센터 - Aircon4u</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/notifications.css">
+</head>
+<body>
+  <!-- 헤더 -->
+  <header class="header">
+    <div class="logo-container">
+      <img src="assets/images/logo.svg" alt="Aircon4u 로고" class="logo">
+      <span class="app-title">Aircon4u</span>
+    </div>
+    
+    <div class="header-actions">
+      <!-- BLE 연결 상태 인디케이터 -->
+      <div class="ble-indicator disconnected" title="BLE 연결 안됨"></div>
+      
+      <!-- 언어 토글 -->
+      <button class="lang-toggle">EN</button>
+      
+      <!-- 테마 토글 -->
+      <button class="theme-toggle">🌙</button>
+      
+      <!-- 알림 버튼 -->
+      <button class="notification-btn active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span class="notification-badge">3</span>
+      </button>
+      
+      <!-- 사용자 메뉴 -->
+      <div class="user-menu">
+        <div class="user-avatar">JD</div>
+        <span class="user-name">홍길동</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+    </div>
+  </header>
+  
+  <!-- 사이드 네비게이션 -->
+  <nav class="sidenav">
+    <span class="nav-toggle">&larr;</span>
+    <div class="nav-item" data-page="index">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="9"></rect>
+        <rect x="14" y="3" width="7" height="5"></rect>
+        <rect x="14" y="12" width="7" height="9"></rect>
+        <rect x="3" y="16" width="7" height="5"></rect>
+      </svg>
+      <span class="nav-text" data-i18n="dashboard">대시보드</span>
+    </div>
+    <div class="nav-item" data-page="units">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      <span class="nav-text" data-i18n="units">유닛 목록</span>
+    </div>
+    <div class="nav-item" data-page="wizard">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+        <polyline points="2 17 12 22 22 17"></polyline>
+        <polyline points="2 12 12 17 22 12"></polyline>
+      </svg>
+      <span class="nav-text" data-i18n="wizard">세척 마법사</span>
+    </div>
+    <div class="nav-item" data-page="analytics">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+      </svg>
+      <span class="nav-text" data-i18n="analytics">예측/분석</span>
+    </div>
+    <div class="nav-item" data-page="reports">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      <span class="nav-text" data-i18n="reports">리포트 센터</span>
+    </div>
+    <div class="nav-item" data-page="sampling">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <circle cx="12" cy="12" r="6"></circle>
+        <circle cx="12" cy="12" r="2"></circle>
+      </svg>
+      <span class="nav-text" data-i18n="sampling">샘플링 대시보드</span>
+    </div>
+    <div class="nav-item" data-page="admin">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9"></path>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+      </svg>
+      <span class="nav-text" data-i18n="admin">관리자 설정</span>
+    </div>
+    <div class="nav-item active" data-page="notifications">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+      </svg>
+      <span class="nav-text" data-i18n="notifications">알림 센터</span>
+    </div>
+  </nav>
+  
+  <!-- 메인 콘텐츠 -->
+  <main class="main-content">
+    <div class="page-header">
+      <h1 class="page-title" data-i18n="notifications">알림 센터</h1>
+      <div class="page-actions">
+        <button class="btn btn-outline mark-all-read-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6L9 17l-5-5"></path>
+          </svg>
+          모두 읽음
+        </button>
+        <button class="btn btn-outline filter-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+          </svg>
+          필터
+        </button>
+      </div>
+    </div>
+    
+    <!-- 알림 필터 및 분류 -->
+    <div class="notification-filters">
+      <div class="filter-group">
+        <div class="filter-label">상태:</div>
+        <div class="filter-options">
+          <button class="filter-option active" data-filter="all">전체</button>
+          <button class="filter-option" data-filter="unread">읽지 않음</button>
+          <button class="filter-option" data-filter="read">읽음</button>
+        </div>
+      </div>
+      
+      <div class="filter-group">
+        <div class="filter-label">유형:</div>
+        <div class="filter-options">
+          <button class="filter-option active" data-type="all">전체</button>
+          <button class="filter-option" data-type="warning">경고</button>
+          <button class="filter-option" data-type="danger">위험</button>
+          <button class="filter-option" data-type="info">정보</button>
+          <button class="filter-option" data-type="success">성공</button>
+        </div>
+      </div>
+      
+      <div class="filter-group">
+        <div class="filter-label">정렬:</div>
+        <div class="filter-options">
+          <button class="filter-option active" data-sort="newest">최신순</button>
+          <button class="filter-option" data-sort="oldest">오래된순</button>
+          <button class="filter-option" data-sort="severity">중요도순</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 알림 목록 -->
+    <div class="notifications-container">
+      <div class="notification-item unread">
+        <div class="notification-icon warning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </div>
+        <div class="notification-content">
+          <div class="notification-title">세척 필요: AC-2023-0042</div>
+          <div class="notification-message">누적 오염도가 임계값을 초과했습니다. 작동 효율을 위해 빠른 세척을 권장합니다.</div>
+          <div class="notification-time">10분 전</div>
+        </div>
+        <div class="notification-actions">
+          <button class="btn btn-sm btn-primary" onclick="location.href='wizard.html'">세척 예약</button>
+          <button class="btn btn-sm btn-outline mark-read-btn">읽음</button>
+        </div>
+      </div>
+      
+      <div class="notification-item unread">
+        <div class="notification-icon danger">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <div class="notification-content">
+          <div class="notification-title">센서 오류: AC-2023-0018</div>
+          <div class="notification-message">흡입 온도 센서 연결이 끊어졌습니다. 유닛의 정상 작동을 위해 기술자 점검이 필요합니다.</div>
+          <div class="notification-time">2시간 전</div>
+        </div>
+        <div class="notification-actions">
+          <button class="btn btn-sm btn-primary" onclick="location.href='details.html?id=AC-2023-0018'">상세 보기</button>
+          <button class="btn btn-sm btn-outline mark-read-btn">읽음</button>
+        </div>
+      </div>
+      
+      <div class="notification-item unread">
+        <div class="notification-icon success">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <div class="notification-content">
+          <div class="notification-title">리포트 생성 완료</div>
+          <div class="notification-message">월간 성능 리포트가 생성되었습니다. 지난 달 대비 15% 효율 향상이 있었습니다.</div>
+          <div class="notification-time">어제</div>
+        </div>
+        <div class="notification-actions">
+          <button class="btn btn-sm btn-primary" onclick="location.href='reports.html'">보기</button>
+          <button class="btn btn-sm btn-outline mark-read-btn">읽음</button>
+        </div>
+      </div>
+      
+      <div class="notification-item read">
+        <div class="notification-icon info">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+        </div>
+        <div class="notification-content">
+          <div class="notification-title">시스템 유지보수 예정</div>
+          <div class="notification-message">2025년 4월 25일 02:00 ~ 04:00 (KST) 동안 시스템 유지보수가 예정되어 있습니다. 해당 시간에는 서비스 이용이 제한될 수 있습니다.</div>
+          <div class="notification-time">2일 전</div>
+        </div>
+        <div class="notification-actions">
+          <button class="btn btn-sm btn-outline mark-unread-btn">읽지 않음</button>
+        </div>
+      </div>
+      
+      <div class="notification-item read">
+        <div class="notification-icon warning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </div>
+        <div class="notification-content">
+          <div class="notification-title">효율 저하: AC-2023-0036</div>
+          <div class="notification-message">AC-2023-0036 유닛의 효율이 정상 대비 15% 저하되었습니다. 점검이 필요합니다.</div>
+          <div class="notification-time">3일 전</div>
+        </div>
+        <div class="notification-actions">
+          <button class="btn btn-sm btn-primary" onclick="location.href='details.html?id=AC-2023-0036'">상세 보기</button>
+          <button class="btn btn-sm btn-outline mark-unread-btn">읽지 않음</button>
+        </div>
+      </div>
+      
+      <div class="notification-item read">
+        <div class="notification-icon success">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <div class="notification-content">
+          <div class="notification-title">세척 완료: AC-2023-0022</div>
+          <div class="notification-message">AC-2023-0022 유닛의 세척이 완료되었습니다. 세척 후 효율이 28% 향상되었습니다.</div>
+          <div class="notification-time">5일 전</div>
+        </div>
+        <div class="notification-actions">
+          <button class="btn btn-sm btn-primary" onclick="location.href='details.html?id=AC-2023-0022'">상세 보기</button>
+          <button class="btn btn-sm btn-outline mark-unread-btn">읽지 않음</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+      <button class="pagination-prev" disabled>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <div class="pagination-pages">
+        <button class="pagination-page active">1</button>
+        <button class="pagination-page">2</button>
+        <button class="pagination-page">3</button>
+        <span class="pagination-ellipsis">...</span>
+        <button class="pagination-page">10</button>
+      </div>
+      <button class="pagination-next">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </main>
+  
+  <!-- 푸터 -->
+  <footer class="footer">
+    <div>Aircon4u v1.0.0 &copy; 2025 Aircon4u. All rights reserved.</div>
+  </footer>
+  
+  <!-- 토스트 컨테이너 -->
+  <div class="toast-container"></div>
+  
+  <script>
+    // 사이드 내비게이션 페이지 전환 기능
+    document.addEventListener('DOMContentLoaded', function() {
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const pageName = this.getAttribute('data-page');
+          if (pageName) {
+            // 현재 페이지가 아닌 경우에만 이동
+            if (!this.classList.contains('active')) {
+              window.location.href = pageName + '.html';
+            }
+          }
+        });
+      });
+      
+      // 알림 필터 옵션
+      const filterOptions = document.querySelectorAll('.filter-option');
+      
+      filterOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          // 같은 그룹 내 다른 옵션 비활성화
+          const parent = this.parentElement;
+          parent.querySelectorAll('.filter-option').forEach(opt => {
+            opt.classList.remove('active');
+          });
+          
+          // 현재 옵션 활성화
+          this.classList.add('active');
+        });
+      });
+      
+      // 알림 읽기/읽지 않음 토글
+      const markReadBtns = document.querySelectorAll('.mark-read-btn');
+      const markUnreadBtns = document.querySelectorAll('.mark-unread-btn');
+      
+      markReadBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const notificationItem = this.closest('.notification-item');
+          notificationItem.classList.remove('unread');
+          notificationItem.classList.add('read');
+        });
+      });
+      
+      markUnreadBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const notificationItem = this.closest('.notification-item');
+          notificationItem.classList.remove('read');
+          notificationItem.classList.add('unread');
+        });
+      });
+      
+      // 모두 읽음 버튼
+      const markAllReadBtn = document.querySelector('.mark-all-read-btn');
+      
+      markAllReadBtn.addEventListener('click', function() {
+        const unreadItems = document.querySelectorAll('.notification-item.unread');
+        unreadItems.forEach(item => {
+          item.classList.remove('unread');
+          item.classList.add('read');
+        });
+      });
+    });
+  </script>
+  
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

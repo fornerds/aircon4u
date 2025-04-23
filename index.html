@@ -649,6 +649,43 @@
             }
           });
         });
+
+        // 메뉴 항목에 'details' 페이지 추가
+        const unitItems = document.querySelectorAll('.cleaning-alerts-table .table tbody tr');
+        if (unitItems) {
+          unitItems.forEach(item => {
+            const unitIdCell = item.querySelector('td:first-child');
+            if (unitIdCell) {
+              const unitId = unitIdCell.textContent.trim();
+              unitIdCell.style.cursor = 'pointer';
+              unitIdCell.addEventListener('click', function() {
+                window.location.href = 'details.html?id=' + encodeURIComponent(unitId);
+              });
+            }
+          });
+        }
+
+        // 리포트 항목 클릭 이벤트 추가
+        const reportItems = document.querySelectorAll('.report-item');
+        if (reportItems) {
+          reportItems.forEach(item => {
+            item.style.cursor = 'pointer';
+            item.addEventListener('click', function() {
+              window.location.href = 'reports.html';
+            });
+          });
+        }
+
+        // 세척 예약 버튼 이벤트 추가
+        const cleaningButtons = document.querySelectorAll('.cleaning-alerts-table .btn-primary');
+        if (cleaningButtons) {
+          cleaningButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+              e.preventDefault();
+              window.location.href = 'wizard.html';
+            });
+          });
+        }
       });
     </script>
     
