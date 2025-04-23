@@ -1,0 +1,539 @@
+/* units.css - Aircon4u 유닛 목록 스타일 */
+
+/* 알림 패널 스타일 */
+.notification-panel {
+  position: absolute;
+  top: var(--header-height);
+  right: 1rem;
+  width: 350px;
+  background-color: var(--white);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--shadow);
+  z-index: 1000;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.notification-panel.show {
+  max-height: 500px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.notification-list {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--gray-200);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.notification-item:hover {
+  background-color: var(--gray-100);
+}
+
+.notification-item.read {
+  opacity: 0.6;
+}
+
+.notification-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-md);
+  flex-shrink: 0;
+}
+
+.notification-icon.warning {
+  background-color: var(--warning);
+  color: var(--gray-800);
+}
+
+.notification-icon.danger {
+  background-color: var(--danger);
+  color: white;
+}
+
+.notification-icon.success {
+  background-color: var(--success);
+  color: white;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-title {
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+}
+
+.notification-text {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  margin-bottom: var(--spacing-xs);
+}
+
+.notification-time {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+}
+
+.notification-footer {
+  padding: var(--spacing-md);
+  text-align: center;
+  border-top: 1px solid var(--gray-200);
+}
+
+.mark-as-read {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-500);
+  margin-left: var(--spacing-sm);
+}
+
+.mark-all-read {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-blue);
+  font-size: 0.9rem;
+}
+
+/* 페이지 헤더 */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+  
+  .page-actions {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+  
+  /* 필터 패널 */
+  .filter-panel {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .filter-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+  
+  .toggle-filters-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gray-600);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+  
+  .toggle-filters-btn.collapsed {
+    transform: rotate(180deg);
+  }
+  
+  .filter-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    max-height: 300px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .filter-body.collapsed {
+    max-height: 0;
+  }
+  
+  .filter-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  .filter-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .filter-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--gray-700);
+  }
+  
+  .filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+  }
+  
+  /* 범위 슬라이더 */
+  .range-slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .range-values {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    text-align: center;
+  }
+  
+  .range-slider {
+    position: relative;
+    height: 6px;
+    margin: 10px 0;
+  }
+  
+  .range-slider-min, .range-slider-max {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 6px;
+    margin: 0;
+    cursor: pointer;
+    background: none;
+    -webkit-appearance: none;
+  }
+  
+  .range-slider-min::-webkit-slider-thumb, .range-slider-max::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .range-slider-min::-moz-range-thumb, .range-slider-max::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    border: none;
+  }
+  
+  .range-slider-min:focus, .range-slider-max:focus {
+    outline: none;
+  }
+  
+  .range-slider::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 6px;
+    background-color: var(--gray-300);
+    border-radius: 3px;
+  }
+  
+  .range-slider::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 6px;
+    background-color: var(--primary-light-blue);
+    border-radius: 3px;
+  }
+  
+  /* 날짜 범위 */
+  .date-range {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+  
+  .date-separator {
+    color: var(--gray-600);
+  }
+  
+  /* 위치 입력 */
+  .location-inputs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
+  }
+  
+  /* 유닛 테이블 카드 */
+  .unit-list-card {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .search-box {
+    position: relative;
+    width: 300px;
+  }
+  
+  .search-box .form-control {
+    padding-right: 2.5rem;
+  }
+  
+  .search-btn {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--gray-600);
+    cursor: pointer;
+  }
+  
+  .table-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+  
+  .items-per-page {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+  
+  .items-per-page span {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+  }
+  
+  .items-per-page .form-control {
+    width: 70px;
+  }
+  
+  /* 테이블 */
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .unit-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .unit-table th,
+  .unit-table td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  
+  .unit-table th {
+    background-color: var(--gray-100);
+    font-weight: 600;
+    color: var(--gray-700);
+    white-space: nowrap;
+  }
+  
+  .unit-table tr:hover {
+    background-color: var(--gray-50);
+  }
+  
+  .sortable {
+    cursor: pointer;
+  }
+  
+  .th-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sort-icon {
+    margin-left: var(--spacing-xs);
+    color: var(--gray-400);
+  }
+  
+  /* 오염 지수 바 */
+  .pollution-bar {
+    height: 6px;
+    background-color: var(--gray-200);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  
+  .pollution-progress {
+    height: 100%;
+    background-color: var(--primary-blue);
+    border-radius: 3px;
+  }
+  
+  .pollution-progress.warning {
+    background-color: var(--warning);
+  }
+  
+  .pollution-progress.danger {
+    background-color: var(--danger);
+  }
+  
+  .pollution-value {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+  }
+  
+  /* 액션 버튼 */
+  .action-buttons {
+    display: flex;
+    gap: var(--spacing-xs);
+  }
+  
+  /* 페이지네이션 */
+  .pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--gray-200);
+  }
+  
+  .pagination-info {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+  }
+  
+  .pagination {
+    display: flex;
+    gap: 4px;
+  }
+  
+  .pagination-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--gray-300);
+    background-color: var(--white);
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .pagination-btn:hover:not(:disabled) {
+    background-color: var(--gray-200);
+  }
+  
+  .pagination-btn.active {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+  }
+  
+  .pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* 모달 스타일 */
+  #new-unit-modal .modal {
+    max-width: 600px;
+  }
+  
+  /* 반응형 스타일 */
+  @media (max-width: 992px) {
+    .filter-row {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .action-buttons button:not(.btn-primary) {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .page-actions {
+      margin-top: var(--spacing-sm);
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    
+    .search-box {
+      width: 100%;
+    }
+    
+    .filter-row {
+      grid-template-columns: 1fr;
+    }
+    
+    .table-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .pagination-container {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+    
+    .location-inputs {
+      grid-template-columns: 1fr;
+    }
+  }

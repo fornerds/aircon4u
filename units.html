@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>유닛 목록 - Aircon4u</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/units.css">
+</head>
+<body>
+  <!-- 헤더 -->
+  <header class="header">
+    <div class="logo-container">
+      <img src="assets/images/logo.svg" alt="Aircon4u 로고" class="logo">
+      <span class="app-title">Aircon4u</span>
+    </div>
+    
+    <div class="header-actions">
+      <!-- BLE 연결 상태 인디케이터 -->
+      <div class="ble-indicator disconnected" title="BLE 연결 안됨"></div>
+      
+      <!-- 언어 토글 -->
+      <button class="lang-toggle">EN</button>
+      
+      <!-- 테마 토글 -->
+      <button class="theme-toggle">🌙</button>
+      
+      <!-- 알림 버튼 -->
+      <button class="notification-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span class="notification-badge">3</span>
+      </button>
+      
+      <!-- 사용자 메뉴 -->
+      <div class="user-menu">
+        <div class="user-avatar">JD</div>
+        <span class="user-name">홍길동</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </div>
+    </div>
+  </header>
+  
+  <!-- 알림 패널 -->
+  <div class="notification-panel">
+    <div class="notification-header">
+      <h3>알림</h3>
+      <button class="mark-all-read">모두 읽음</button>
+    </div>
+    <div class="notification-list">
+      <div class="notification-item">
+        <div class="notification-icon warning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </div>
+        <div class="notification-content">
+          <div class="notification-title">세척 필요: AC-2023-0042</div>
+          <div class="notification-text">누적 오염도가 임계값을 초과했습니다.</div>
+          <div class="notification-time">10분 전</div>
+        </div>
+        <button class="mark-as-read" title="읽음 표시">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="notification-item">
+        <div class="notification-icon danger">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <div class="notification-content">
+          <div class="notification-title">센서 오류: AC-2023-0018</div>
+          <div class="notification-text">흡입 온도 센서 연결이 끊어졌습니다.</div>
+          <div class="notification-time">2시간 전</div>
+        </div>
+        <button class="mark-as-read" title="읽음 표시">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="notification-item">
+        <div class="notification-icon success">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <div class="notification-content">
+          <div class="notification-title">리포트 생성 완료</div>
+          <div class="notification-text">월간 성능 리포트가 생성되었습니다.</div>
+          <div class="notification-time">어제</div>
+        </div>
+        <button class="mark-as-read" title="읽음 표시">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="notification-footer">
+      <a href="notifications.html">모든 알림 보기</a>
+    </div>
+  </div>
+  
+  <!-- 사용자 드롭다운 메뉴 -->
+  <div class="user-dropdown">
+    <div class="user-dropdown-header">
+      <div class="user-dropdown-avatar">JD</div>
+      <div class="user-dropdown-info">
+        <div class="user-dropdown-name">홍길동</div>
+        <div class="user-dropdown-email">hong@example.com</div>
+      </div>
+    </div>
+    <div class="user-dropdown-body">
+      <a href="#" class="user-dropdown-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        내 프로필
+      </a>
+      <a href="#" class="user-dropdown-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        설정
+      </a>
+      <a href="#" class="user-dropdown-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+        로그아웃
+      </a>
+    </div>
+  </div>
+  
+  <!-- 사이드 네비게이션 -->
+  <nav class="sidenav">
+    <span class="nav-toggle">&larr;</span>
+    <div class="nav-item" data-page="index">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="9"></rect>
+        <rect x="14" y="3" width="7" height="5"></rect>
+        <rect x="14" y="12" width="7" height="9"></rect>
+        <rect x="3" y="16" width="7" height="5"></rect>
+      </svg>
+      <span class="nav-text" data-i18n="dashboard">대시보드</span>
+    </div>
+    <div class="nav-item active" data-page="units">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+      <span class="nav-text" data-i18n="units">유닛 목록</span>
+    </div>
+    <div class="nav-item" data-page="wizard">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+        <polyline points="2 17 12 22 22 17"></polyline>
+        <polyline points="2 12 12 17 22 12"></polyline>
+      </svg>
+      <span class="nav-text" data-i18n="wizard">세척 마법사</span>
+    </div>
+    <div class="nav-item" data-page="analytics">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"></line>
+        <line x1="12" y1="20" x2="12" y2="4"></line>
+        <line x1="6" y1="20" x2="6" y2="14"></line>
+      </svg>
+      <span class="nav-text" data-i18n="analytics">예측/분석</span>
+    </div>
+    <div class="nav-item" data-page="reports">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      <span class="nav-text" data-i18n="reports">리포트 센터</span>
+    </div>
+    <div class="nav-item" data-page="sampling">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <circle cx="12" cy="12" r="6"></circle>
+        <circle cx="12" cy="12" r="2"></circle>
+      </svg>
+      <span class="nav-text" data-i18n="sampling">샘플링 대시보드</span>
+    </div>
+    <div class="nav-item" data-page="admin">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9"></path>
+        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+      </svg>
+      <span class="nav-text" data-i18n="admin">관리자 설정</span>
+    </div>
+    <div class="nav-item" data-page="notifications">
+      <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+      </svg>
+      <span class="nav-text" data-i18n="notifications">알림 센터</span>
+    </div>
+  </nav>
+  
+  <!-- 메인 콘텐츠 -->
+  <main class="main-content">
+    <div class="page-header">
+      <h1 class="page-title" data-i18n="units">유닛 목록</h1>
+      <div class="page-actions">
+        <button class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="12" y1="8" x2="12" y2="16"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+          </svg>
+          새 유닛 등록
+        </button>
+        <button class="btn btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          CSV 내보내기
+        </button>
+        <button class="btn btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          CSV 가져오기
+        </button>
+      </div>
+    </div>
+    
+    <!-- 필터 패널 -->
+    <div class="card filter-panel">
+      <div class="filter-header">
+        <h2 class="filter-title">필터</h2>
+        <button class="toggle-filters-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+      <div class="filter-body">
+        <div class="filter-row">
+          <div class="filter-item">
+            <label class="filter-label">건물</label>
+            <select class="form-control">
+              <option value="">전체</option>
+              <option value="A">A동</option>
+              <option value="B">B동</option>
+              <option value="C">C동</option>
+            </select>
+          </div>
+          <div class="filter-item">
+            <label class="filter-label">층</label>
+            <select class="form-control">
+              <option value="">전체</option>
+              <option value="1">1층</option>
+              <option value="2">2층</option>
+              <option value="3">3층</option>
+              <option value="4">4층</option>
+            </select>
+          </div>
+          <div class="filter-item">
+            <label class="filter-label">구역</label>
+            <select class="form-control">
+              <option value="">전체</option>
+              <option value="office">사무실</option>
+              <option value="meeting">회의실</option>
+              <option value="lobby">로비</option>
+              <option value="cafeteria">구내식당</option>
+            </select>
+          </div>
+          <div class="filter-item">
+            <label class="filter-label">설치 연도</label>
+            <select class="form-control">
+              <option value="">전체</option>
+              <option value="2023">2023년</option>
+              <option value="2022">2022년</option>
+              <option value="2021">2021년</option>
+              <option value="2020">2020년</option>
+              <option value="older">2020년 이전</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-row">
+          <div class="filter-item">
+            <label class="filter-label">세척 상태</label>
+            <select class="form-control">
+              <option value="">전체</option>
+              <option value="clean">양호</option>
+              <option value="warning">경고</option>
+              <option value="danger">긴급</option>
+            </select>
+          </div>
+          <div class="filter-item">
+            <label class="filter-label">PM2.5 범위</label>
+            <div class="range-slider-container">
+              <div class="range-values">
+                <span id="pm25-min-value">0</span> - <span id="pm25-max-value">50</span> μg/m³
+              </div>
+              <div class="range-slider">
+                <input type="range" min="0" max="50" value="0" class="range-slider-min" id="pm25-min">
+                <input type="range" min="0" max="50" value="50" class="range-slider-max" id="pm25-max">
+              </div>
+            </div>
+          </div>
+          <div class="filter-item">
+            <label class="filter-label">최근 세척일</label>
+            <div class="date-range">
+              <input type="date" class="form-control" placeholder="시작일">
+              <span class="date-separator">~</span>
+              <input type="date" class="form-control" placeholder="종료일">
+            </div>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button class="btn btn-outline btn-sm reset-filters-btn">필터 초기화</button>
+          <button class="btn btn-primary btn-sm apply-filters-btn">적용</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 유닛 목록 테이블 -->
+    <div class="card unit-list-card">
+      <div class="card-header">
+        <div class="search-box">
+          <input type="text" class="form-control" placeholder="유닛 ID, 명칭, 위치 검색...">
+          <button class="search-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="table-actions">
+          <div class="items-per-page">
+            <span>표시:</span>
+            <select class="form-control">
+              <option value="10">10</option>
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="table-container">
+        <table class="table unit-table">
+          <thead>
+            <tr>
+              <th class="sortable">
+                <div class="th-content">
+                  유닛 ID
+                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 11 12 6 17 11"></polyline>
+                    <polyline points="7 17 12 12 17 17"></polyline>
+                  </svg>
+                </div>
+              </th>
+              <th class="sortable">
+                <div class="th-content">
+                  명칭
+                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 11 12 6 17 11"></polyline>
+                    <polyline points="7 17 12 12 17 17"></polyline>
+                  </svg>
+                </div>
+              </th>
+              <th class="sortable">
+                <div class="th-content">
+                  설치 위치
+                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 11 12 6 17 11"></polyline>
+                    <polyline points="7 17 12 12 17 17"></polyline>
+                  </svg>
+                </div>
+              </th>
+              <th class="sortable">
+                <div class="th-content">
+                  연식
+                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 11 12 6 17 11"></polyline>
+                    <polyline points="7 17 12 12 17 17"></polyline>
+                  </svg>
+                </div>
+              </th>
+              <th class="sortable">
+                <div class="th-content">
+                  최근 세척일
+                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 11 12 6 17 11"></polyline>
+                    <polyline points="7 17 12 12 17 17"></polyline>
+                  </svg>
+                </div>
+              </th>
+              <th class="sortable">
+                <div class="th-content">
+                  PM2.5 평균
+                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 11 12 6 17 11"></polyline>
+                    <polyline points="7 17 12 12 17 17"></polyline>
+                  </svg>
+                </div>
+              </th>
+              <th class="sortable">
+                <div class="th-content">
+                  오염 지수
+                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 11 12 6 17 11"></polyline>
+                    <polyline points="7 17 12 12 17 17"></polyline>
+                  </svg>
+                </div>
+              </th>
+              <th class="sortable">
+                <div class="th-content">
+                  상태
+                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 11 12 6 17 11"></polyline>
+                    <polyline points="7 17 12 12 17 17"></polyline>
+                  </svg>
+                </div>
+              </th>
+              <th>액션</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AC-2023-0001</td>
+              <td>대회의실 메인</td>
+              <td>A동 3층 대회의실</td>
+              <td>2년 3개월</td>
+              <td>2025-02-15</td>
+              <td>14.3 μg/m³</td>
+              <td>
+                <div class="pollution-bar">
+                  <div class="pollution-progress" style="width: 45%;"></div>
+                </div>
+                <span class="pollution-value">45%</span>
+              </td>
+              <td><span class="badge badge-success">양호</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-sm btn-outline" title="디테일 보기">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                  <button class="btn btn-sm btn-outline" title="세척 전 측정 시작">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                  </button>
+                  <button class="btn btn-sm btn-outline" title="세척 완료 입력">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>AC-2023-0002</td>
+              <td>사무실 A</td>
+              <td>A동 2층 사무공간</td>
+              <td>1년 8개월</td>
+              <td>2025-03-10</td>
+              <td>16.8 μg/m³</td>
+              <td>
+                <div class="pollution-bar">
+                  <div class="pollution-progress" style="width: 38%;"></div>
+                </div>
+                <span class="pollution-value">38%</span>
+              </td>
+              <td><span class="badge badge-success">양호</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-sm btn-outline" title="디테일 보기">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                  <button class="btn btn-sm btn-outline" title="세척 전 측정 시작">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                  </button>
+                  <button class="btn btn-sm btn-outline" title="세척 완료 입력">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>AC-2023-0003</td>
+              <td>로비 메인</td>
+              <td>A동 1층 로비</td>
+              <td>1년 11개월</td>
+              <td>2025-01-05</td>
+              <td>21.5 μg/m³</td>
+              <td>
+                <div class="pollution-bar">
+                  <div class="pollution-progress warning" style="width: 75%;"></div>
+                </div>
+                <span class="pollution-value">75%</span>
+              </td>
+              <td><span class="badge badge-warning">경고</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-sm btn-outline" title="디테일 보기">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                  <button class="btn btn-sm btn-outline" title="세척 전 측정 시작">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                  </button>
+                  <button class="btn btn-sm btn-outline" title="세척 완료 입력">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>AC-2023-0008</td>
+              <td>소회의실 B</td>
+              <td>B동 3층 소회의실</td>
+              <td>2년 2개월</td>
+              <td>2024-12-20</td>
+              <td>28.3 μg/m³</td>
+              <td>
+                <div class="pollution-bar">
+                  <div class="pollution-progress danger" style="width: 92%;"></div>
+                </div>
+                <span class="pollution-value">92%</span>
+              </td>
+              <td><span class="badge badge-danger">긴급</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-sm btn-outline" title="디테일 보기">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                  <button class="btn btn-sm btn-primary" title="세척 전 측정 시작">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                    측정 시작
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>AC-2023-0022</td>
+              <td>구내식당 메인</td>
+              <td>A동 1층 구내식당</td>
+              <td>3년 1개월</td>
+              <td>2025-01-15</td>
+              <td>24.7 μg/m³</td>
+              <td>
+                <div class="pollution-bar">
+                  <div class="pollution-progress warning" style="width: 82%;"></div>
+                </div>
+                <span class="pollution-value">82%</span>
+              </td>
+              <td><span class="badge badge-warning">경고</span></td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-sm btn-outline" title="디테일 보기">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  </button>
+                  <button class="btn btn-sm btn-outline" title="세척 전 측정 시작">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                    </svg>
+                  </button>
+                  <button class="btn btn-sm btn-outline" title="세척 완료 입력">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- 페이지네이션 -->
+      <div class="pagination-container">
+        <div class="pagination-info">총 87개 항목 중 1-25 표시 중</div>
+        <div class="pagination">
+          <button class="pagination-btn" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="11 17 6 12 11 7"></polyline>
+              <polyline points="18 17 13 12 18 7"></polyline>
+            </svg>
+          </button>
+          <button class="pagination-btn" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="pagination-btn active">1</button>
+          <button class="pagination-btn">2</button>
+          <button class="pagination-btn">3</button>
+          <button class="pagination-btn">4</button>
+          <button class="pagination-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+          <button class="pagination-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="13 17 18 12 13 7"></polyline>
+              <polyline points="6 17 11 12 6 7"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- 푸터 -->
+  <footer class="footer">
+    <div>Aircon4u v1.0.0 &copy; 2025 Aircon4u. All rights reserved.</div>
+  </footer>
+  
+  <!-- 유닛 등록 모달 -->
+  <div class="modal-backdrop" id="new-unit-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">새 유닛 등록</h3>
+        <button class="modal-close" onclick="closeModal('new-unit-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">유닛 ID</label>
+          <input type="text" class="form-control" placeholder="자동 생성됨" disabled>
+        </div>
+        <div class="form-group">
+          <label class="form-label">명칭</label>
+          <input type="text" class="form-control" placeholder="유닛 명칭을 입력하세요">
+        </div>
+        <div class="form-group">
+          <label class="form-label">설치 위치</label>
+          <div class="location-inputs">
+            <select class="form-control">
+              <option value="">건물 선택</option>
+              <option value="A">A동</option>
+              <option value="B">B동</option>
+              <option value="C">C동</option>
+            </select>
+            <select class="form-control">
+              <option value="">층 선택</option>
+              <option value="1">1층</option>
+              <option value="2">2층</option>
+              <option value="3">3층</option>
+              <option value="4">4층</option>
+            </select>
+            <select class="form-control">
+              <option value="">구역 선택</option>
+              <option value="office">사무실</option>
+              <option value="meeting">회의실</option>
+              <option value="lobby">로비</option>
+              <option value="cafeteria">구내식당</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">설치일</label>
+          <input type="date" class="form-control">
+        </div>
+        <div class="form-group">
+          <label class="form-label">모델명</label>
+          <input type="text" class="form-control" placeholder="모델명을 입력하세요">
+        </div>
+        <div class="form-group">
+          <label class="form-label">BLE MAC 주소</label>
+          <input type="text" class="form-control" placeholder="BLE MAC 주소를 입력하세요">
+        </div>
+        <div class="form-group">
+          <label class="form-label">비고</label>
+          <textarea class="form-control" rows="3" placeholder="추가 정보를 입력하세요"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('new-unit-modal')">취소</button>
+        <button class="btn btn-primary">저장</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 토스트 컨테이너 -->
+  <div class="toast-container"></div>
+  
+  <script>
+    // 사이드 내비게이션 페이지 전환 기능
+    document.addEventListener('DOMContentLoaded', function() {
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const pageName = this.getAttribute('data-page');
+          if (pageName) {
+            // 현재 페이지가 아닌 경우에만 이동
+            if (!this.classList.contains('active')) {
+              window.location.href = pageName + '.html';
+            }
+          }
+        });
+      });
+    });
+  </script>
+  
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/units.js"></script>
+</body>
+</html>

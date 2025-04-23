@@ -1,0 +1,743 @@
+/* wizard.css - Aircon4u 세척 마법사 스타일 */
+
+/* 페이지 헤더 */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+  
+  .unit-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background-color: var(--gray-100);
+    padding: 0.5rem var(--spacing-md);
+    border-radius: var(--border-radius);
+  }
+  
+  .unit-label {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+  }
+  
+  .unit-id {
+    font-weight: 500;
+    color: var(--primary-deep-blue);
+  }
+  
+  .unit-name {
+    font-weight: 500;
+  }
+  
+  .unit-location {
+    color: var(--gray-600);
+    font-size: 0.9rem;
+  }
+  
+  /* 마법사 단계 */
+  .wizard-steps {
+    display: flex;
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+  }
+  
+  .wizard-steps::before {
+    content: "";
+    position: absolute;
+    top: 24px;
+    left: 40px;
+    right: 40px;
+    height: 2px;
+    background-color: var(--gray-300);
+    z-index: 1;
+  }
+  
+  .wizard-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .step-number {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--white);
+    border: 2px solid var(--gray-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-md);
+    transition: all 0.3s ease;
+  }
+  
+  .step-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .wizard-step.active .step-number {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: var(--white);
+  }
+  
+  .wizard-step.active .step-label {
+    color: var(--primary-deep-blue);
+    font-weight: 600;
+  }
+  
+  .wizard-step.completed .step-number {
+    background-color: var(--success);
+    border-color: var(--success);
+    color: var(--white);
+  }
+  
+  /* 마법사 콘텐츠 */
+  .wizard-content {
+    position: relative;
+  }
+  
+  .wizard-panel {
+    display: none;
+  }
+  
+  .wizard-panel.active {
+    display: block;
+  }
+  
+  .card-body {
+    padding: var(--spacing-lg);
+  }
+  
+  .card-footer {
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--gray-200);
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* 센서 연결 상태 */
+  .sensor-connection-status {
+    margin-bottom: var(--spacing-lg);
+    background-color: var(--gray-50);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+  }
+  
+  .connection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .connection-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+  
+  .refresh-btn {
+    cursor: pointer;
+    color: var(--primary-blue);
+    transition: transform 0.3s ease;
+  }
+  
+  .refresh-btn:hover {
+    transform: rotate(180deg);
+  }
+  
+  .connection-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  .connection-item {
+    background-color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--gray-200);
+  }
+  
+  .connection-name {
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .connection-status {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 500;
+    font-size: 0.85rem;
+  }
+  
+  .connection-status.connected {
+    color: var(--success);
+  }
+  
+  .connection-status.disconnected {
+    color: var(--gray-500);
+  }
+  
+  /* 측정 컨테이너 */
+  .measurement-container {
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+  }
+  
+  .measurement-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .measurement-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+  
+  .measurement-status {
+    background-color: var(--gray-100);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--gray-700);
+  }
+  
+  .measurement-status.measuring {
+    background-color: var(--primary-light-blue);
+    color: var(--primary-deep-blue);
+  }
+  
+  .measurement-status.completed {
+    background-color: var(--success);
+    color: white;
+  }
+  
+  .measurement-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .measurement-group {
+    background-color: var(--gray-50);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+  }
+  
+  .group-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+  }
+  
+  .measurement-values {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  .measurement-value {
+    background-color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--gray-200);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .value-label {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    margin-bottom: 4px;
+  }
+  
+  .value-number {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+  
+  .value-unit {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+  }
+  
+  .timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .timer-label {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .timer-value {
+    display: flex;
+    align-items: baseline;
+  }
+  
+  .timer-number {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--primary-deep-blue);
+  }
+  
+  .timer-desc {
+    font-size: 1rem;
+    color: var(--gray-600);
+    margin-left: var(--spacing-xs);
+  }
+  
+  .start-measurement-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+  
+  /* 체크리스트 */
+  .checklist-container {
+    padding: var(--spacing-md);
+  }
+  
+  .checklist-header {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .checklist-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .checklist-subtitle {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+  }
+  
+  .checklist-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .checklist-item {
+    display: flex;
+  }
+  
+  .checklist-checkbox {
+    display: none;
+  }
+  
+  .checklist-label {
+    display: flex;
+    cursor: pointer;
+  }
+  
+  .checkbox-custom {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 2px solid var(--gray-300);
+    margin-right: var(--spacing-md);
+    position: relative;
+    flex-shrink: 0;
+  }
+  
+  .checkbox-custom::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .checklist-checkbox:checked + .checklist-label .checkbox-custom {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+  }
+  
+  .checklist-checkbox:checked + .checklist-label .checkbox-custom::after {
+    opacity: 1;
+  }
+  
+  .checkbox-content {
+    flex: 1;
+  }
+  
+  .checkbox-title {
+    font-weight: 500;
+    color: var(--gray-800);
+    margin-bottom: 4px;
+  }
+  
+  .checkbox-desc {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+  }
+  
+  .checklist-note {
+    background-color: var(--gray-50);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary-light-blue);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  
+  .note-icon {
+    color: var(--primary-blue);
+    margin-top: 2px;
+  }
+  
+  .note-text {
+    font-size: 0.9rem;
+    color: var(--gray-700);
+  }
+  
+  /* 비교 결과 */
+  .comparison-results {
+    background-color: var(--gray-50);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin-top: var(--spacing-lg);
+  }
+  
+  .comparison-header {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .comparison-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: 4px;
+  }
+  
+  .comparison-subtitle {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+  }
+  
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  .comparison-item {
+    background-color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    text-align: center;
+    border: 1px solid var(--gray-200);
+  }
+  
+  .comparison-label {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .comparison-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-blue);
+  }
+  
+  /* 리포트 미리보기 */
+  .report-preview-container {
+    padding: var(--spacing-md);
+  }
+  
+  .report-header {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .report-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: 4px;
+  }
+  
+  .report-subtitle {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+  }
+  
+  .report-form {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  .report-preview {
+    background-color: var(--gray-50);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-lg);
+    overflow: hidden;
+  }
+  
+  .report-preview-header {
+    background-color: var(--gray-200);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-weight: 500;
+    color: var(--gray-700);
+    text-align: center;
+  }
+  
+  .report-preview-content {
+    padding: var(--spacing-md);
+    display: flex;
+    justify-content: center;
+    min-height: 300px;
+  }
+  
+  .report-preview-content img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+  }
+  
+  .report-recipients {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+  }
+  
+  .recipients-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .recipients-header h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+  
+  .recipients-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .recipient-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--gray-50);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+  }
+  
+  .recipient-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+  
+  .recipient-name {
+    font-weight: 500;
+    color: var(--gray-800);
+  }
+  
+  .recipient-email {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+  }
+  
+  .remove-recipient-btn {
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  .remove-recipient-btn:hover {
+    color: var(--danger);
+  }
+  
+  /* 완료 모달 */
+  .complete-message {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .complete-icon {
+    width: 64px;
+    height: 64px;
+    background-color: var(--success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+  
+  .complete-text h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .complete-text p {
+    color: var(--gray-600);
+  }
+  
+  .next-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .action-item {
+    background-color: var(--gray-50);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+  }
+  
+  .action-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    color: var(--gray-700);
+    transition: background-color 0.2s ease;
+  }
+  
+  .action-link:hover {
+    background-color: var(--primary-sky-blue);
+    color: var(--primary-deep-blue);
+  }
+  
+  /* 버튼 스타일 */
+  .btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  /* 반응형 스타일 */
+  @media (max-width: 992px) {
+    .connection-list,
+    .comparison-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .unit-info {
+      margin-top: var(--spacing-sm);
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    
+    .measurement-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    
+    .comparison-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .wizard-steps {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .wizard-steps::before {
+      display: none;
+    }
+    
+    .wizard-step {
+      flex-direction: row;
+      gap: var(--spacing-sm);
+    }
+    
+    .step-number {
+      margin-bottom: 0;
+    }
+    
+    .connection-list {
+      grid-template-columns: 1fr;
+    }
+    
+    .card-footer {
+      flex-direction: column;
+      gap: var(--spacing-md);
+    }
+    
+    .card-footer .btn {
+      width: 100%;
+    }
+  }

@@ -1,0 +1,644 @@
+/* dashboard.css - Aircon4u 대시보드 스타일 */
+
+/* 페이지 헤더 */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+  
+  .page-actions {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+  
+  .date-selector {
+    position: relative;
+  }
+  
+  .date-selector-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+  
+  /* KPI 카드 */
+  .kpi-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .kpi-card {
+    background-color: var(--white);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--shadow);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+  }
+  
+  .kpi-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--spacing-md);
+    color: white;
+  }
+  
+  .kpi-card-icon.efficiency {
+    background-color: #3498db;
+  }
+  
+  .kpi-card-icon.energy {
+    background-color: #2ecc71;
+  }
+  
+  .kpi-card-icon.carbon {
+    background-color: #9b59b6;
+  }
+  
+  .kpi-card-icon.cleaning {
+    background-color: #e74c3c;
+  }
+  
+  .kpi-card-content {
+    flex: 1;
+  }
+  
+  .kpi-card-title {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .kpi-card-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .kpi-card-change {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .kpi-card-change svg {
+    margin-right: 2px;
+  }
+  
+  .kpi-card-change.positive {
+    color: var(--success);
+  }
+  
+  .kpi-card-change.negative {
+    color: var(--danger);
+  }
+  
+  /* 실시간 센서 스트림 카드 */
+  .row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .sensor-stream-card {
+    grid-column: 1 / 3;
+  }
+  
+  .sensor-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+  
+  .sensor-item {
+    background-color: var(--gray-50);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+  }
+  
+  .sensor-title {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .sensor-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .sensor-chart {
+    height: 40px;
+    width: 100%;
+    position: relative;
+  }
+  
+  /* 엔탈피 차트 카드 */
+  .enthalpy-card {
+    grid-column: 1 / 2;
+  }
+  
+  .enthalpy-chart-container {
+    height: 300px;
+    position: relative;
+  }
+  
+  .time-range-toggles {
+    display: flex;
+    gap: 4px;
+  }
+  
+  .time-range-btn {
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    border-radius: var(--border-radius);
+    background-color: var(--gray-200);
+    color: var(--gray-700);
+    cursor: pointer;
+    border: none;
+  }
+  
+  .time-range-btn.active {
+    background-color: var(--primary-light-blue);
+    color: var(--primary-deep-blue);
+    font-weight: 500;
+  }
+  
+  /* 세척 알림 카드 */
+  .cleaning-alerts-card {
+    grid-column: 2 / 3;
+  }
+  
+  .progress-bar {
+    height: 6px;
+    background-color: var(--gray-200);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  
+  .progress {
+    height: 100%;
+    background-color: var(--primary-blue);
+    border-radius: 3px;
+  }
+  
+  .progress-text {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+  }
+  
+  /* 최근 리포트 카드 */
+  .recent-reports-card {
+    grid-column: 1 / 3;
+  }
+  
+  .reports-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+  }
+  
+  .report-item {
+    background-color: var(--gray-50);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .report-thumbnail {
+    width: 100%;
+    height: 120px;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+    overflow: hidden;
+  }
+  
+  .report-thumbnail img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+  }
+  
+  .report-info {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .report-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--gray-800);
+    margin-bottom: 4px;
+  }
+  
+  .report-date {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+  }
+  
+  .report-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-sm);
+    margin-top: auto;
+  }
+  
+  /* BLE 인디케이터 */
+  .ble-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: var(--spacing-md);
+    position: relative;
+  }
+  
+  .ble-indicator::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    bottom: -4px;
+    left: -4px;
+    border-radius: 50%;
+    z-index: -1;
+  }
+  
+  .ble-indicator.connected {
+    background-color: var(--success);
+  }
+  
+  .ble-indicator.connected::after {
+    background-color: rgba(40, 167, 69, 0.2);
+  }
+  
+  .ble-indicator.disconnected {
+    background-color: var(--gray-400);
+  }
+  
+  /* 알림 패널 */
+  .notification-panel {
+    position: absolute;
+    top: var(--header-height);
+    right: 16px;
+    width: 320px;
+    background-color: var(--white);
+    border-radius: var(--card-border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+  }
+  
+  .notification-panel.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .notification-header {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .notification-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+  }
+  
+  .mark-all-read {
+    font-size: 0.85rem;
+    color: var(--primary-blue);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .notification-list {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .notification-item {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .notification-item:hover {
+    background-color: var(--gray-50);
+  }
+  
+  .notification-item.read {
+    opacity: 0.6;
+  }
+  
+  .notification-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--spacing-sm);
+    flex-shrink: 0;
+  }
+  
+  .notification-icon.warning {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .notification-icon.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .notification-icon.success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .notification-content {
+    flex: 1;
+  }
+  
+  .notification-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--gray-800);
+    margin-bottom: 4px;
+  }
+  
+  .notification-text {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    margin-bottom: 4px;
+  }
+  
+  .notification-time {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+  }
+  
+  .mark-as-read {
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    cursor: pointer;
+    padding: 4px;
+  }
+  
+  .notification-footer {
+    padding: var(--spacing-md);
+    text-align: center;
+    border-top: 1px solid var(--gray-200);
+  }
+  
+  .notification-footer a {
+    font-size: 0.85rem;
+    color: var(--primary-blue);
+  }
+  
+  /* 사용자 드롭다운 메뉴 */
+  .user-dropdown {
+    position: absolute;
+    top: var(--header-height);
+    right: 16px;
+    width: 240px;
+    background-color: var(--white);
+    border-radius: var(--card-border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+  }
+  
+  .user-dropdown.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .user-dropdown-header {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-dropdown-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--primary-light-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-weight: 600;
+    margin-right: var(--spacing-sm);
+  }
+  
+  .user-dropdown-info {
+    flex: 1;
+  }
+  
+  .user-dropdown-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--gray-800);
+    margin-bottom: 2px;
+  }
+  
+  .user-dropdown-email {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+  }
+  
+  .user-dropdown-body {
+    padding: var(--spacing-sm) 0;
+  }
+  
+  .user-dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--gray-700);
+    transition: background-color 0.2s ease;
+  }
+  
+  .user-dropdown-item:hover {
+    background-color: var(--gray-100);
+  }
+  
+  .user-dropdown-item svg {
+    margin-right: var(--spacing-sm);
+  }
+  
+  /* 글로벌 검색 */
+  .search-form {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .search-input {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  .search-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .search-tab {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--gray-600);
+    cursor: pointer;
+  }
+  
+  .search-tab.active {
+    color: var(--primary-blue);
+    border-bottom-color: var(--primary-blue);
+    font-weight: 500;
+  }
+  
+  .search-results-empty {
+    padding: var(--spacing-md);
+    text-align: center;
+    color: var(--gray-500);
+  }
+  
+  /* 토스트 메시지 */
+  .toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .toast {
+    padding: 12px 16px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+    min-width: 250px;
+    max-width: 320px;
+  }
+  
+  .toast.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .toast-info {
+    background-color: #e3f2fd;
+    color: #0c5460;
+  }
+  
+  .toast-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .toast-warning {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .toast-error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  /* 반응형 스타일 */
+  @media (max-width: 992px) {
+    .kpi-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .sensor-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .row {
+      grid-template-columns: 1fr;
+    }
+    
+    .enthalpy-card, .cleaning-alerts-card, .recent-reports-card {
+      grid-column: 1;
+    }
+    
+    .reports-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .kpi-cards {
+      grid-template-columns: 1fr;
+    }
+    
+    .sensor-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .reports-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .page-actions {
+      margin-top: var(--spacing-sm);
+      width: 100%;
+    }
+  }
