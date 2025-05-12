@@ -8,6 +8,238 @@
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/analytics.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* 세척 효과 분석 스타일 */
+    .cleaning-benefits {
+      margin-top: 2rem;
+      padding: 1rem 0;
+    }
+    
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    
+    .benefit-card {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .benefit-icon {
+      background-color: rgba(52, 152, 219, 0.1);
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    
+    .benefit-card:nth-child(1) .benefit-icon {
+      background-color: rgba(231, 76, 60, 0.1);
+      color: #e74c3c;
+    }
+    
+    .benefit-card:nth-child(2) .benefit-icon {
+      background-color: rgba(46, 204, 113, 0.1);
+      color: #2ecc71;
+    }
+    
+    .benefit-card:nth-child(3) .benefit-icon {
+      background-color: rgba(241, 196, 15, 0.1);
+      color: #f1c40f;
+    }
+    
+    .benefit-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .benefit-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+    
+    .benefit-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .benefit-chart {
+      width: 100%;
+      height: 180px;
+      margin-top: auto;
+    }
+    
+    /* 시계열 예측 차트 스타일 */
+    .forecast-chart-container {
+      height: 350px;
+      margin-bottom: 2rem;
+    }
+    
+    .seasonal-chart-container {
+      height: 250px;
+      margin-top: 1rem;
+    }
+    
+    /* 세척 최적 주기 분석 스타일 */
+    .optimal-cleaning-cycle {
+      margin-top: 2.5rem;
+      padding: 1.5rem;
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+    
+    .cycle-analysis-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    
+    .cycle-chart-container {
+      flex: 1;
+      min-width: 300px;
+      height: 350px;
+    }
+    
+    .cycle-details {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .cycle-explanation {
+      margin-bottom: 1.5rem;
+    }
+    
+    .cycle-explanation h4 {
+      margin-bottom: 0.8rem;
+      color: var(--text-primary);
+    }
+    
+    .cycle-explanation p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .cycle-table-container {
+      margin-top: 1.5rem;
+      overflow-x: auto;
+    }
+    
+    .cycle-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .cycle-table th,
+    .cycle-table td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .cycle-table th {
+      background-color: rgba(52, 152, 219, 0.1);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    .cycle-table tr:hover {
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+    
+    .cycle-factors {
+      margin-top: 2rem;
+    }
+    
+    .cycle-factors h4 {
+      margin-bottom: 1rem;
+    }
+    
+    .factors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .factor-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 1rem;
+      background-color: var(--bg-secondary);
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+    
+    .factor-item:hover {
+      transform: translateY(-3px);
+    }
+    
+    .factor-icon {
+      margin-right: 1rem;
+      color: var(--primary-color);
+      flex-shrink: 0;
+    }
+    
+    .factor-content h5 {
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    
+    .factor-content p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    
+    .cycle-recommendation {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background-color: rgba(46, 204, 113, 0.1);
+      border-radius: 8px;
+      border-left: 4px solid #2ecc71;
+    }
+    
+    .cycle-recommendation h4 {
+      margin-bottom: 1rem;
+      color: #2ecc71;
+    }
+    
+    .recommendation-content {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .recommendation-content p {
+      margin-bottom: 0.8rem;
+    }
+    
+    .recommendation-content strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+  </style>
 </head>
 <body>
   <!-- 헤더 -->
@@ -92,7 +324,7 @@
         <line x1="16" y1="17" x2="8" y2="17"></line>
         <polyline points="10 9 9 9 8 9"></polyline>
       </svg>
-      <span class="nav-text" data-i18n="reports">리포트 센터</span>
+      <span class="nav-text" data-i18n="reports">리포트 센터 (준비중)</span>
     </div>
     <div class="nav-item" data-page="sampling">
       <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -100,21 +332,21 @@
         <circle cx="12" cy="12" r="6"></circle>
         <circle cx="12" cy="12" r="2"></circle>
       </svg>
-      <span class="nav-text" data-i18n="sampling">샘플링 대시보드</span>
+      <span class="nav-text" data-i18n="sampling">샘플링 대시보드 (준비중)</span>
     </div>
     <div class="nav-item" data-page="admin">
       <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 20h9"></path>
         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
       </svg>
-      <span class="nav-text" data-i18n="admin">관리자 설정</span>
+      <span class="nav-text" data-i18n="admin">관리자 설정 (준비중)</span>
     </div>
     <div class="nav-item" data-page="notifications">
       <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
         <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
       </svg>
-      <span class="nav-text" data-i18n="notifications">알림 센터</span>
+      <span class="nav-text" data-i18n="notifications">알림 센터 (준비중)</span>
     </div>
   </nav>
   
@@ -474,7 +706,7 @@
           </div>
           <div class="card-body">
             <div class="simulator-description">
-              <p>세척 주기 시뮬레이터는 여러 요소를 고려하여 각 유닛의 최적 세척 주기를 계산합니다. 아래 가중치 슬라이더를 조정하여 시뮬레이션을 맞춤화할 수 있습니다.</p>
+              <p>세척 주기 시뮬레이터는 여러 요소를 고려하여 각 유닛의 최적 세척 주기를 계산하고, 세척 효과를 분석합니다. 아래 가중치 슬라이더를 조정하여 시뮬레이션을 맞춤화할 수 있습니다.</p>
             </div>
             
             <div class="simulator-controls">
@@ -550,6 +782,175 @@
                 </div>
               </div>
               
+              <div class="cleaning-benefits">
+                <h3>세척 효과 분석</h3>
+                <div class="benefits-grid">
+                  <div class="benefit-card">
+                    <div class="benefit-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                      </svg>
+                    </div>
+                    <div class="benefit-title">비용 절감 효과</div>
+                    <div class="benefit-value">₩2,490,000/년</div>
+                    <div class="benefit-desc">전력 소비 감소로 인한 연간 비용 절감액</div>
+                    <div class="benefit-chart">
+                      <canvas id="costSavingChart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <div class="benefit-card">
+                    <div class="benefit-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a9 9 0 0 0-9 9c0 4.17 2.84 7.67 6.69 8.69L12 22l2.31-2.31C18.16 18.67 21 15.17 21 11a9 9 0 0 0-9-9z"></path>
+                      </svg>
+                    </div>
+                    <div class="benefit-title">공기질 개선</div>
+                    <div class="benefit-value">32% 개선</div>
+                    <div class="benefit-desc">실내 공기질 개선 및 미세먼지 감소 효과</div>
+                    <div class="benefit-chart">
+                      <canvas id="airQualityChart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <div class="benefit-card">
+                    <div class="benefit-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                      </svg>
+                    </div>
+                    <div class="benefit-title">ROI 개선</div>
+                    <div class="benefit-value">215%</div>
+                    <div class="benefit-desc">세척 투자 대비 수익률 (전력 절감 + 수명 연장)</div>
+                    <div class="benefit-chart">
+                      <canvas id="roiChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 세척 최적 주기 섹션 추가 -->
+              <div class="optimal-cleaning-cycle">
+                <h3>세척 최적 주기 분석</h3>
+                <div class="cycle-analysis-container">
+                  <div class="cycle-chart-container">
+                    <canvas id="optimalCycleChart"></canvas>
+                  </div>
+                  
+                  <div class="cycle-details">
+                    <div class="cycle-explanation">
+                      <h4>최적 세척 주기 설명</h4>
+                      <p>최적 세척 주기는 설비의 효율성, 에너지 소비, 공기질, 유지보수 비용 등 다양한 요소를 종합적으로 고려하여 산출됩니다. 아래 표는 각 유닛 유형별 권장 세척 주기입니다.</p>
+                    </div>
+                    
+                    <div class="cycle-table-container">
+                      <table class="cycle-table">
+                        <thead>
+                          <tr>
+                            <th>유닛 유형</th>
+                            <th>사용 환경</th>
+                            <th>최적 세척 주기</th>
+                            <th>권장 시기</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>대형 (회의실, 로비)</td>
+                            <td>고사용량</td>
+                            <td>2-3개월</td>
+                            <td>성수기 전</td>
+                          </tr>
+                          <tr>
+                            <td>중형 (사무실)</td>
+                            <td>중간 사용량</td>
+                            <td>3-4개월</td>
+                            <td>분기별</td>
+                          </tr>
+                          <tr>
+                            <td>소형 (개인실)</td>
+                            <td>저사용량</td>
+                            <td>4-6개월</td>
+                            <td>반기별</td>
+                          </tr>
+                          <tr>
+                            <td>특수 환경 (주방, 실험실)</td>
+                            <td>고오염 환경</td>
+                            <td>1-2개월</td>
+                            <td>월별/격월</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="cycle-factors">
+                  <h4>세척 주기 결정 요인</h4>
+                  <div class="factors-grid">
+                    <div class="factor-item">
+                      <div class="factor-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                      </div>
+                      <div class="factor-content">
+                        <h5>가동 시간</h5>
+                        <p>하루 8시간 이상 가동되는 유닛은 더 짧은 주기의 세척이 필요합니다.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="factor-item">
+                      <div class="factor-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+                        </svg>
+                      </div>
+                      <div class="factor-content">
+                        <h5>환경 조건</h5>
+                        <p>먼지가 많거나 습도가 높은 환경에서는 오염 축적이 빨라 더 자주 세척해야 합니다.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="factor-item">
+                      <div class="factor-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                      </div>
+                      <div class="factor-content">
+                        <h5>설비 연식</h5>
+                        <p>5년 이상된 오래된 설비는 더 잦은 세척이 필요하며, 효율 저하가 빠르게 진행됩니다.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="factor-item">
+                      <div class="factor-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+                          <path d="M21 12a9 9 0 0 0-9-9v9h9z"></path>
+                        </svg>
+                      </div>
+                      <div class="factor-content">
+                        <h5>계절적 요인</h5>
+                        <p>여름철과 겨울철 사용량이 많은 시기에는 세척 주기를 단축하는 것이 효율적입니다.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="cycle-recommendation">
+                  <h4>맞춤형 세척 주기 추천</h4>
+                  <div class="recommendation-content">
+                    <p>현재 설정된 조건에서 귀사의 설비에 대한 맞춤형 세척 주기는 <strong>평균 3.2개월</strong>입니다. 이는 일반적인 권장 주기(4-6개월)보다 짧지만, 에너지 효율성과 공기질 개선 효과를 고려할 때 비용 대비 효과가 가장 높은 주기입니다.</p>
+                    <p>특히 <strong>대회의실 메인</strong>과 <strong>로비 메인</strong> 유닛은 2.5개월 주기로, <strong>사무실 구역</strong> 유닛은 3.5개월 주기로 세척하는 것이 권장됩니다. 이러한 최적화된 세척 주기를 통해 연간 약 <strong>250만원의 비용 절감</strong>과 <strong>설비 수명 18% 연장</strong> 효과를 기대할 수 있습니다.</p>
+                  </div>
+                </div>
+              </div>
+              
               <div class="results-summary">
                 <div class="summary-item">
                   <div class="summary-label">연간 총 세척 횟수</div>
@@ -564,8 +965,8 @@
                   <div class="summary-value" id="power-saving">12,450 kWh</div>
                 </div>
                 <div class="summary-item">
-                  <div class="summary-label">예상 비용 절감</div>
-                  <div class="summary-value" id="cost-saving">₩2,490,000</div>
+                  <div class="summary-label">설비 수명 연장</div>
+                  <div class="summary-value" id="lifespan-extension">+18%</div>
                 </div>
               </div>
               
@@ -580,7 +981,7 @@
                 <div class="recommendation-content">
                   <div class="recommendation-title">최적화 추천</div>
                   <div class="recommendation-text">
-                    현재 설정에서는 여름철(6~8월)에 세척 빈도를 15% 증가시키고, 운영 피크 시즌에는 우선순위가 높은 유닛(회의실, 로비)에 집중하는 것이 좋습니다. 가동률이 높은 유닛은 더 짧은 세척 주기(약 2.5개월)가 권장됩니다.
+                    현재 설정에서는 여름철(6~8월)에 세척 빈도를 15% 증가시키고, 운영 피크 시즌에는 우선순위가 높은 유닛(회의실, 로비)에 집중하는 것이 좋습니다. 가동률이 높은 유닛은 더 짧은 세척 주기(약 2.5개월)가 권장됩니다. 이를 통해 연간 약 250만원의 비용 절감과 공기질 32% 개선 효과를 기대할 수 있습니다.
                   </div>
                 </div>
               </div>
@@ -1158,5 +1559,397 @@
   
   <script src="assets/js/main.js"></script>
   <script src="assets/js/analytics.js"></script>
+  <script>
+    // 사이드 내비게이션 페이지 전환 기능
+    document.addEventListener('DOMContentLoaded', function() {
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      navItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const pageName = this.getAttribute('data-page');
+          if (pageName) {
+            // 현재 페이지가 아닌 경우에만 이동
+            if (!this.classList.contains('active')) {
+              window.location.href = pageName + '.html';
+            }
+          }
+        });
+      });
+      
+      // 시계열 예측 차트 초기화
+      initForecastCharts();
+      
+      // 세척 효과 차트 초기화
+      initCleaningBenefitCharts();
+      
+      // 최적 세척 주기 차트 초기화
+      initOptimalCycleChart();
+    });
+    
+    // 시계열 예측 차트 초기화 함수
+    function initForecastCharts() {
+      // 예측 차트
+      const forecastCtx = document.getElementById('forecastChart');
+      if (forecastCtx) {
+        const forecastChart = new Chart(forecastCtx, {
+          type: 'line',
+          data: {
+            labels: generateDateLabels(90),
+            datasets: [
+              {
+                label: '실제 데이터',
+                data: generateHistoricalData(45),
+                borderColor: '#2980b9',
+                backgroundColor: 'rgba(41, 128, 185, 0.1)',
+                borderWidth: 2,
+                pointRadius: 2,
+                fill: true,
+                tension: 0.4
+              },
+              {
+                label: '예측 데이터',
+                data: generateForecastData(45, 45),
+                borderColor: '#e74c3c',
+                backgroundColor: 'rgba(231, 76, 60, 0.1)',
+                borderWidth: 2,
+                borderDash: [5, 5],
+                pointRadius: 2,
+                fill: true,
+                tension: 0.4
+              },
+              {
+                label: '임계값',
+                data: Array(90).fill(85),
+                borderColor: '#f39c12',
+                backgroundColor: 'transparent',
+                borderWidth: 2,
+                borderDash: [2, 2],
+                pointRadius: 0,
+                fill: false
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'top',
+              },
+              tooltip: {
+                mode: 'index',
+                intersect: false
+              }
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: '날짜'
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: '오염도 (%)'
+                },
+                min: 0,
+                max: 100
+              }
+            }
+          }
+        });
+      }
+      
+      // 계절적 패턴 차트
+      const seasonalCtx = document.getElementById('seasonalChart');
+      if (seasonalCtx) {
+        const seasonalChart = new Chart(seasonalCtx, {
+          type: 'line',
+          data: {
+            labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            datasets: [
+              {
+                label: '평균 오염도 증가율',
+                data: [12, 15, 20, 25, 32, 40, 45, 42, 36, 28, 20, 15],
+                borderColor: '#3498db',
+                backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'top',
+              }
+            },
+            scales: {
+              y: {
+                title: {
+                  display: true,
+                  text: '월간 오염도 증가율 (%)'
+                }
+              }
+            }
+          }
+        });
+      }
+    }
+    
+    // 세척 효과 차트 초기화
+    function initCleaningBenefitCharts() {
+      // 비용 절감 차트
+      const costCtx = document.getElementById('costSavingChart');
+      if (costCtx) {
+        const costChart = new Chart(costCtx, {
+          type: 'bar',
+          data: {
+            labels: ['세척 전', '세척 후'],
+            datasets: [{
+              label: '연간 운영 비용 (만원)',
+              data: [850, 601],
+              backgroundColor: ['#e74c3c', '#2ecc71'],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      }
+      
+      // 공기질 개선 차트
+      const airQualityCtx = document.getElementById('airQualityChart');
+      if (airQualityCtx) {
+        const airQualityChart = new Chart(airQualityCtx, {
+          type: 'radar',
+          data: {
+            labels: ['미세먼지', '박테리아', '곰팡이', '알레르기 유발물질', '냄새'],
+            datasets: [
+              {
+                label: '세척 전',
+                data: [80, 75, 85, 70, 90],
+                backgroundColor: 'rgba(231, 76, 60, 0.2)',
+                borderColor: '#e74c3c',
+                borderWidth: 2,
+                pointBackgroundColor: '#e74c3c'
+              },
+              {
+                label: '세척 후',
+                data: [30, 25, 40, 35, 45],
+                backgroundColor: 'rgba(46, 204, 113, 0.2)',
+                borderColor: '#2ecc71',
+                borderWidth: 2,
+                pointBackgroundColor: '#2ecc71'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                min: 0,
+                max: 100,
+                ticks: {
+                  display: false
+                }
+              }
+            }
+          }
+        });
+      }
+      
+      // ROI 개선 차트
+      const roiCtx = document.getElementById('roiChart');
+      if (roiCtx) {
+        const roiChart = new Chart(roiCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['전력 절감', '수명 연장', '유지보수 감소', '생산성 향상'],
+            datasets: [{
+              data: [45, 25, 20, 10],
+              backgroundColor: [
+                '#3498db',
+                '#2ecc71',
+                '#f1c40f',
+                '#9b59b6'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: {
+                  boxWidth: 12
+                }
+              }
+            }
+          }
+        });
+      }
+    }
+    
+    // 최적 세척 주기 차트 초기화
+    function initOptimalCycleChart() {
+      const optimalCycleCtx = document.getElementById('optimalCycleChart');
+      if (optimalCycleCtx) {
+        const optimalCycleChart = new Chart(optimalCycleCtx, {
+          type: 'bar',
+          data: {
+            labels: ['대형 (회의실, 로비)', '중형 (사무실)', '소형 (개인실)', '특수 환경 (주방, 실험실)'],
+            datasets: [
+              {
+                label: '일반 권장 주기 (월)',
+                data: [4, 5, 6, 3],
+                backgroundColor: 'rgba(52, 152, 219, 0.6)',
+                borderColor: 'rgba(52, 152, 219, 1)',
+                borderWidth: 1
+              },
+              {
+                label: '최적화된 주기 (월)',
+                data: [2.5, 3.5, 4.5, 1.5],
+                backgroundColor: 'rgba(46, 204, 113, 0.6)',
+                borderColor: 'rgba(46, 204, 113, 1)',
+                borderWidth: 1
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'top',
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    return context.dataset.label + ': ' + context.raw + '개월';
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: '유닛 유형'
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: '세척 주기 (월)'
+                },
+                min: 0,
+                max: 8
+              }
+            }
+          }
+        });
+        
+        // 효율성 개선 차트 추가
+        const efficiencyData = {
+          labels: ['대형', '중형', '소형', '특수'],
+          datasets: [
+            {
+              type: 'line',
+              label: '효율성 개선 (%)',
+              data: [24, 18, 12, 32],
+              borderColor: '#e67e22',
+              backgroundColor: 'rgba(230, 126, 34, 0.1)',
+              borderWidth: 2,
+              fill: false,
+              tension: 0.4,
+              yAxisID: 'y1'
+            }
+          ]
+        };
+        
+        // 기존 차트에 데이터셋 추가
+        optimalCycleChart.data.datasets.push(efficiencyData.datasets[0]);
+        
+        // 두 번째 Y축 추가
+        optimalCycleChart.options.scales.y1 = {
+          type: 'linear',
+          position: 'right',
+          title: {
+            display: true,
+            text: '효율성 개선 (%)'
+          },
+          min: 0,
+          max: 40,
+          grid: {
+            drawOnChartArea: false
+          }
+        };
+        
+        optimalCycleChart.update();
+      }
+    }
+    
+    // 날짜 라벨 생성 함수
+    function generateDateLabels(days) {
+      const labels = [];
+      const today = new Date();
+      
+      for (let i = -Math.floor(days/2); i < Math.ceil(days/2); i++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() + i);
+        labels.push(`${date.getMonth()+1}/${date.getDate()}`);
+      }
+      
+      return labels;
+    }
+    
+    // 과거 데이터 생성 함수
+    function generateHistoricalData(days) {
+      const data = [];
+      let value = 10;
+      
+      for (let i = 0; i < days; i++) {
+        value += Math.random() * 3 - 0.5;
+        value = Math.max(0, Math.min(100, value));
+        data.push(value);
+      }
+      
+      return data;
+    }
+    
+    // 예측 데이터 생성 함수
+    function generateForecastData(historyDays, forecastDays) {
+      const data = Array(historyDays).fill(null);
+      let value = 65;
+      
+      for (let i = 0; i < forecastDays; i++) {
+        value += Math.random() * 2 + 0.5;
+        value = Math.max(0, Math.min(100, value));
+        data.push(value);
+      }
+      
+      return data;
+    }
+  </script>
 </body>
 </html>

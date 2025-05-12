@@ -7,7 +7,42 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/dashboard.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Chart.js 먼저 로드 후 어노테이션 플러그인 로드 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.1.0/dist/chartjs-plugin-annotation.min.js"></script>
+  <script>
+    // Chart.js 및 어노테이션 플러그인 로드 확인
+    window.addEventListener('load', function() {
+      console.log('Chart.js 로드 상태:', typeof Chart !== 'undefined' ? '로드됨' : '로드되지 않음');
+      console.log('ChartAnnotation 플러그인 로드 상태:', typeof window.ChartAnnotation !== 'undefined' ? '로드됨' : '로드되지 않음');
+      
+      // 플러그인이 로드되지 않았을 경우 수동으로 등록
+      if (typeof Chart !== 'undefined') {
+        console.log('Chart.js 감지됨, 어노테이션 플러그인 확인 중...');
+        
+        if (typeof window.ChartAnnotation === 'undefined') {
+          console.log('ChartAnnotation 수동 등록 시도...');
+          
+          // Chart 객체에서 어노테이션 플러그인 확인
+          if (Chart.annotation) {
+            window.ChartAnnotation = Chart.annotation;
+            console.log('Chart.annotation에서 플러그인 등록됨');
+          } 
+          // 전역 ChartAnnotation 확인
+          else if (typeof ChartAnnotation !== 'undefined') {
+            window.ChartAnnotation = ChartAnnotation;
+            console.log('전역 ChartAnnotation에서 플러그인 등록됨');
+          }
+          
+          // 플러그인 사용 가능 시 등록
+          if (window.ChartAnnotation) {
+            Chart.register(window.ChartAnnotation);
+            console.log('ChartAnnotation 수동 등록 완료');
+          }
+        }
+      }
+    });
+  </script>
 </head>
 <body>
   <!-- 헤더 -->
@@ -170,7 +205,7 @@
         <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
       </svg>
-      <span class="nav-text" data-i18n="units">유닛 목록</span>
+      <span class="nav-text" data-i18n="units">냉난방기목록</span>
     </div>
     <div class="nav-item" data-page="wizard">
       <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -196,7 +231,7 @@
         <line x1="16" y1="17" x2="8" y2="17"></line>
         <polyline points="10 9 9 9 8 9"></polyline>
       </svg>
-      <span class="nav-text" data-i18n="reports">리포트 센터</span>
+      <span class="nav-text" data-i18n="reports">리포트 센터 (준비중)</span>
     </div>
     <div class="nav-item" data-page="sampling">
       <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -204,21 +239,21 @@
         <circle cx="12" cy="12" r="6"></circle>
         <circle cx="12" cy="12" r="2"></circle>
       </svg>
-      <span class="nav-text" data-i18n="sampling">샘플링 대시보드</span>
+      <span class="nav-text" data-i18n="sampling">냉난방기고장예측 (27년 서비스예정)</span>
     </div>
     <div class="nav-item" data-page="admin">
       <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 20h9"></path>
         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
       </svg>
-      <span class="nav-text" data-i18n="admin">관리자 설정</span>
+      <span class="nav-text" data-i18n="admin">관리자 설정 (준비중)</span>
     </div>
     <div class="nav-item" data-page="notifications">
       <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
         <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
       </svg>
-      <span class="nav-text" data-i18n="notifications">알림 센터</span>
+      <span class="nav-text" data-i18n="notifications">알림 센터 (준비중)</span>
     </div>
   </nav>
   
@@ -330,78 +365,17 @@
         </div>
       </section>
       
-      <!-- 실시간 센서 스트림 섹션 -->
-      <section class="row">
-        <div class="card sensor-stream-card">
-          <div class="card-header">
-            <h2 class="card-title">실시간 센서 스트림</h2>
-            <div class="card-actions">
-              <select class="sensor-select">
-                <option value="AC-2023-0001">AC-2023-0001 (회의실A)</option>
-                <option value="AC-2023-0002">AC-2023-0002 (회의실B)</option>
-                <option value="AC-2023-0003">AC-2023-0003 (로비)</option>
-              </select>
-              <button class="btn btn-outline refresh-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="1 4 1 10 7 10"></polyline>
-                  <polyline points="23 20 23 14 17 14"></polyline>
-                  <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
-                </svg>
-                새로고침
-              </button>
-            </div>
-          </div>
-          
-          <div class="sensor-grid">
-            <div class="sensor-item">
-              <div class="sensor-title">흡입 온도</div>
-              <div class="sensor-value">24.5°C</div>
-              <div class="sensor-chart mini-chart-1"></div>
-            </div>
-            <div class="sensor-item">
-              <div class="sensor-title">흡입 습도</div>
-              <div class="sensor-value">45%</div>
-              <div class="sensor-chart mini-chart-2"></div>
-            </div>
-            <div class="sensor-item">
-              <div class="sensor-title">흡입 풍속</div>
-              <div class="sensor-value">3.2 m/s</div>
-              <div class="sensor-chart mini-chart-3"></div>
-            </div>
-            <div class="sensor-item">
-              <div class="sensor-title">흡입 PM2.5</div>
-              <div class="sensor-value">18 μg/m³</div>
-              <div class="sensor-chart mini-chart-4"></div>
-            </div>
-            <div class="sensor-item">
-              <div class="sensor-title">토출 온도</div>
-              <div class="sensor-value">14.2°C</div>
-              <div class="sensor-chart mini-chart-5"></div>
-            </div>
-            <div class="sensor-item">
-              <div class="sensor-title">토출 습도</div>
-              <div class="sensor-value">62%</div>
-              <div class="sensor-chart mini-chart-6"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- 엔탈피 차트 및 세척 알림 섹션 -->
+      <!-- 오염도 차트 및 세척 알림 섹션 -->
       <section class="row">
         <div class="card enthalpy-card">
           <div class="card-header">
-            <h2 class="card-title">엔탈피 차트</h2>
-            <div class="card-actions">
-              <div class="time-range-toggles">
-                <button class="btn btn-sm time-range-btn active">일</button>
-                <button class="btn btn-sm time-range-btn">주</button>
-                <button class="btn btn-sm time-range-btn">월</button>
-              </div>
-            </div>
+            <h2 class="card-title">오염도 차트</h2>
           </div>
           <div class="enthalpy-chart-container">
             <canvas id="enthalpyChart"></canvas>
+            <div class="chart-description">
+              <p>분해세척 주기를 보여주는 오염도 변화 그래프입니다. 붉은색 세로 점선은 세척 시점을 표시합니다.</p>
+            </div>
           </div>
         </div>
         
@@ -597,7 +571,7 @@
           </div>
         </div>
       </section>
-    </main>
+  </main>
     
     <!-- 푸터 -->
     <footer class="footer">
