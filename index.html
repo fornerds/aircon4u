@@ -48,8 +48,7 @@
   <!-- 헤더 -->
   <header class="header">
     <div class="logo-container">
-      <img src="assets/images/logo.svg" alt="Aircon4u 로고" class="logo">
-      <span class="app-title">Aircon4u</span>
+      <img src="assets/images/logo.png" alt="Aircon4u 로고" class="logo">
     </div>
     
     <div class="header-actions">
@@ -239,7 +238,7 @@
         <circle cx="12" cy="12" r="6"></circle>
         <circle cx="12" cy="12" r="2"></circle>
       </svg>
-      <span class="nav-text" data-i18n="sampling">냉난방기고장예측 (27년 서비스예정)</span>
+      <span class="nav-text" data-i18n="sampling">에어컨닥터(고장예측서비스, 26년 예정)</span>
     </div>
     <div class="nav-item" data-page="admin">
       <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -286,6 +285,40 @@
     
     <!-- KPI 카드 섹션 -->
     <section class="kpi-cards">
+      <div class="kpi-card">
+        <div class="kpi-card-icon cleaning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+        </div>
+        <div class="kpi-card-content">
+          <h3 class="kpi-card-title">세척 현황</h3>
+          <div class="kpi-card-split">
+            <div class="kpi-card-split-item">
+              <div class="kpi-card-label">공기살균기</div>
+              <div class="kpi-card-value">6 대</div>
+              <div class="kpi-card-change negative">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                1.5%
+              </div>
+            </div>
+            <div class="kpi-card-split-item">
+              <div class="kpi-card-label">에어컨</div>
+              <div class="kpi-card-value">8 대</div>
+              <div class="kpi-card-change negative">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                2.6%
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="kpi-card">
         <div class="kpi-card-icon efficiency">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -344,25 +377,6 @@
             </div>
           </div>
         </div>
-        
-        <div class="kpi-card">
-          <div class="kpi-card-icon cleaning">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
-              <line x1="7" y1="7" x2="7.01" y2="7"></line>
-            </svg>
-          </div>
-          <div class="kpi-card-content">
-            <h3 class="kpi-card-title">세척 필요 예상</h3>
-            <div class="kpi-card-value">14 대</div>
-            <div class="kpi-card-change negative">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-              2.1%
-            </div>
-          </div>
-        </div>
       </section>
       
       <!-- 오염도 차트 및 세척 알림 섹션 -->
@@ -381,7 +395,7 @@
         
         <div class="card cleaning-alerts-card">
           <div class="card-header">
-            <h2 class="card-title">세척 알림</h2>
+            <h2 class="card-title">필터 청소 및 세척 알림</h2>
             <div class="card-actions">
               <button class="btn btn-outline btn-sm">
                 모두 보기

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>유닛 목록 - Aircon4u</title>
+  <title>냉난방기 목록 - Aircon4u</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/units.css">
@@ -169,7 +169,7 @@
         <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
       </svg>
-      <span class="nav-text" data-i18n="units">유닛 목록</span>
+      <span class="nav-text" data-i18n="units">냉난방기 목록</span>
     </div>
     <div class="nav-item" data-page="wizard">
       <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -203,7 +203,7 @@
         <circle cx="12" cy="12" r="6"></circle>
         <circle cx="12" cy="12" r="2"></circle>
       </svg>
-      <span class="nav-text" data-i18n="sampling">샘플링 대시보드 (준비중)</span>
+      <span class="nav-text" data-i18n="sampling">에어컨닥터(고장예측서비스, 26년 예정)</span>
     </div>
     <div class="nav-item" data-page="admin">
       <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -224,7 +224,7 @@
   <!-- 메인 콘텐츠 -->
   <main class="main-content">
     <div class="page-header">
-      <h1 class="page-title" data-i18n="units">유닛 목록</h1>
+      <h1 class="page-title" data-i18n="units">냉난방기 목록</h1>
       <div class="page-actions">
         <button class="btn btn-primary">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -232,7 +232,7 @@
             <line x1="12" y1="8" x2="12" y2="16"></line>
             <line x1="8" y1="12" x2="16" y2="12"></line>
           </svg>
-          새 유닛 등록
+          새 냉난방기 등록
         </button>
         <button class="btn btn-outline">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -266,49 +266,25 @@
       <div class="filter-body">
         <div class="filter-row">
           <div class="filter-item">
-            <label class="filter-label">건물</label>
+            <label class="filter-label">공기살균기 설치상태</label>
             <select class="form-control">
               <option value="">전체</option>
-              <option value="A">A동</option>
-              <option value="B">B동</option>
-              <option value="C">C동</option>
+              <option value="installed">설치됨</option>
+              <option value="not_installed">미설치</option>
+              <option value="planned">설치 예정</option>
             </select>
           </div>
           <div class="filter-item">
-            <label class="filter-label">층</label>
+            <label class="filter-label">필터청소상태</label>
             <select class="form-control">
               <option value="">전체</option>
-              <option value="1">1층</option>
-              <option value="2">2층</option>
-              <option value="3">3층</option>
-              <option value="4">4층</option>
+              <option value="clean">양호</option>
+              <option value="warning">청소 필요</option>
+              <option value="critical">긴급 청소</option>
             </select>
           </div>
           <div class="filter-item">
-            <label class="filter-label">구역</label>
-            <select class="form-control">
-              <option value="">전체</option>
-              <option value="office">사무실</option>
-              <option value="meeting">회의실</option>
-              <option value="lobby">로비</option>
-              <option value="cafeteria">구내식당</option>
-            </select>
-          </div>
-          <div class="filter-item">
-            <label class="filter-label">설치 연도</label>
-            <select class="form-control">
-              <option value="">전체</option>
-              <option value="2023">2023년</option>
-              <option value="2022">2022년</option>
-              <option value="2021">2021년</option>
-              <option value="2020">2020년</option>
-              <option value="older">2020년 이전</option>
-            </select>
-          </div>
-        </div>
-        <div class="filter-row">
-          <div class="filter-item">
-            <label class="filter-label">세척 상태</label>
+            <label class="filter-label">세척상태</label>
             <select class="form-control">
               <option value="">전체</option>
               <option value="clean">양호</option>
@@ -316,20 +292,22 @@
               <option value="danger">긴급</option>
             </select>
           </div>
+        </div>
+        <div class="filter-row">
           <div class="filter-item">
-            <label class="filter-label">PM2.5 범위</label>
+            <label class="filter-label">PM10 범위</label>
             <div class="range-slider-container">
               <div class="range-values">
-                <span id="pm25-min-value">0</span> - <span id="pm25-max-value">50</span> μg/m³
+                <span id="pm10-min-value">0</span> - <span id="pm10-max-value">100</span> μg/m³
               </div>
               <div class="range-slider">
-                <input type="range" min="0" max="50" value="0" class="range-slider-min" id="pm25-min">
-                <input type="range" min="0" max="50" value="50" class="range-slider-max" id="pm25-max">
+                <input type="range" min="0" max="100" value="0" class="range-slider-min" id="pm10-min">
+                <input type="range" min="0" max="100" value="100" class="range-slider-max" id="pm10-max">
               </div>
             </div>
           </div>
           <div class="filter-item">
-            <label class="filter-label">최근 세척일</label>
+            <label class="filter-label">최근세척일</label>
             <div class="date-range">
               <input type="date" class="form-control" placeholder="시작일">
               <span class="date-separator">~</span>
@@ -384,25 +362,7 @@
               </th>
               <th class="sortable">
                 <div class="th-content">
-                  명칭
-                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="7 11 12 6 17 11"></polyline>
-                    <polyline points="7 17 12 12 17 17"></polyline>
-                  </svg>
-                </div>
-              </th>
-              <th class="sortable">
-                <div class="th-content">
                   설치 위치
-                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="7 11 12 6 17 11"></polyline>
-                    <polyline points="7 17 12 12 17 17"></polyline>
-                  </svg>
-                </div>
-              </th>
-              <th class="sortable">
-                <div class="th-content">
-                  연식
                   <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="7 11 12 6 17 11"></polyline>
                     <polyline points="7 17 12 12 17 17"></polyline>
@@ -420,7 +380,25 @@
               </th>
               <th class="sortable">
                 <div class="th-content">
-                  PM2.5 평균
+                  최근 필터 청소일
+                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 11 12 6 17 11"></polyline>
+                    <polyline points="7 17 12 12 17 17"></polyline>
+                  </svg>
+                </div>
+              </th>
+              <th class="sortable">
+                <div class="th-content">
+                  공기 살균기 설치일
+                  <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="7 11 12 6 17 11"></polyline>
+                    <polyline points="7 17 12 12 17 17"></polyline>
+                  </svg>
+                </div>
+              </th>
+              <th class="sortable">
+                <div class="th-content">
+                  PM10 평균
                   <svg class="sort-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="7 11 12 6 17 11"></polyline>
                     <polyline points="7 17 12 12 17 17"></polyline>
@@ -451,10 +429,10 @@
           <tbody>
             <tr>
               <td>AC-2023-0001</td>
-              <td>대회의실 메인</td>
               <td>A동 3층 대회의실</td>
-              <td>2년 3개월</td>
               <td>2025-02-15</td>
+              <td>2025-03-01</td>
+              <td>2024-05-12</td>
               <td>14.3 μg/m³</td>
               <td>
                 <div class="pollution-bar">
@@ -488,10 +466,10 @@
             </tr>
             <tr>
               <td>AC-2023-0002</td>
-              <td>사무실 A</td>
               <td>A동 2층 사무공간</td>
-              <td>1년 8개월</td>
               <td>2025-03-10</td>
+              <td>2025-03-15</td>
+              <td>2024-06-23</td>
               <td>16.8 μg/m³</td>
               <td>
                 <div class="pollution-bar">
@@ -525,10 +503,10 @@
             </tr>
             <tr>
               <td>AC-2023-0003</td>
-              <td>로비 메인</td>
               <td>A동 1층 로비</td>
-              <td>1년 11개월</td>
               <td>2025-01-05</td>
+              <td>2025-02-20</td>
+              <td>2024-04-30</td>
               <td>21.5 μg/m³</td>
               <td>
                 <div class="pollution-bar">
@@ -562,10 +540,10 @@
             </tr>
             <tr>
               <td>AC-2023-0008</td>
-              <td>소회의실 B</td>
               <td>B동 3층 소회의실</td>
-              <td>2년 2개월</td>
               <td>2024-12-20</td>
+              <td>2025-01-10</td>
+              <td>미설치</td>
               <td>28.3 μg/m³</td>
               <td>
                 <div class="pollution-bar">
@@ -594,10 +572,10 @@
             </tr>
             <tr>
               <td>AC-2023-0022</td>
-              <td>구내식당 메인</td>
               <td>A동 1층 구내식당</td>
-              <td>3년 1개월</td>
               <td>2025-01-15</td>
+              <td>2025-02-05</td>
+              <td>2024-07-15</td>
               <td>24.7 μg/m³</td>
               <td>
                 <div class="pollution-bar">
@@ -677,7 +655,7 @@
   <div class="modal-backdrop" id="new-unit-modal">
     <div class="modal">
       <div class="modal-header">
-        <h3 class="modal-title">새 유닛 등록</h3>
+        <h3 class="modal-title">새 냉난방기 등록</h3>
         <button class="modal-close" onclick="closeModal('new-unit-modal')">&times;</button>
       </div>
       <div class="modal-body">

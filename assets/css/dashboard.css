@@ -642,3 +642,25 @@
       width: 100%;
     }
   }
+  
+  /* 새로 추가한 KPI 카드 분할 스타일 */
+  .kpi-card-split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+  }
+  
+  .kpi-card-split-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+  
+  .kpi-card-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
